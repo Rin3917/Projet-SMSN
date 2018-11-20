@@ -6,6 +6,9 @@
 package com.PROJET.Ejb;
 
 import com.PROJET.JavaBeans.Utilisateur;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -42,7 +45,11 @@ public class UtilisateurEjb {
      {
         Utilisateur user ;
         Query q = em.createQuery("SELECT u  FROM  Utilisateur u WHERE u.Mdp= :param1 AND u.Mail= :param2" );
-        q.setParameter("param1", mdp);
+         try {
+             q.setParameter("param1", Utilisateur.getEncodedPassword(mdp));
+         } catch (NoSuchAlgorithmException ex) {
+             ex.printStackTrace();
+         }
         q.setParameter("param2", Mail);
         try
         {

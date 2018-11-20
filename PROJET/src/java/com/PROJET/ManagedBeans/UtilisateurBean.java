@@ -5,11 +5,17 @@
  */
 package com.PROJET.ManagedBeans;
 
+import com.PROJET.Ejb.UtilisateurEjb;
 import com.PROJET.JavaBeans.Utilisateur;
 import java.io.Serializable;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
@@ -20,14 +26,55 @@ import javax.transaction.UserTransaction;
  */
 @Named @SessionScoped
 public class UtilisateurBean implements Serializable {
+
+    @EJB
+    private UtilisateurEjb utilisateurEjb;
     
       @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
+    
 
    Utilisateur user = new Utilisateur();
+   
+   public String inscrireUtilisateur()
+   {
+       FacesMessage message;
+       String redirection = "authentification.jsf";
+       try{
+           if(isValidEmailAddress(user.getMail()))
+           {
+           utilisateurEjb.ajouter(user);
+               message = new FacesMessage("Vous vous ètes inscrit avec succès,vous pouvez maintenant vous connecter");
+           }
+           else{
+               message = new FacesMessage("Veuillez entrez un E-mail correct");
+               redirection = "inscription.jsf";
+           }
+ 
+       }catch(Exception e)
+       {
+             message = new FacesMessage("Erreur lors de l'authentification");
+              redirection = "inscription.jsf";
+           e.printStackTrace();
+           
+       }
+       FacesContext.getCurrentInstance().addMessage(null, message);
+       return redirection;
+   }
+   
+public static boolean isValidEmailAddress(String email) {
+   boolean result = true;
+   try {
+      InternetAddress emailAddr = new InternetAddress(email);
+      emailAddr.validate();
+   } catch (AddressException ex) {
+      result = false;
+   }
+   return result;
+}
 
     public Utilisateur getUser() {
         return user;

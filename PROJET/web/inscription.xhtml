@@ -5,12 +5,28 @@ Université de Franche-Comté
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <h:form>
+            Bienvenue <br/>
+            Veuillez entrez votre adresse mail.
+            <p class="label"><label>E-mail</label></p>
+            <p><h:inputText label="Adresse Mail" id="mail" value="#{utilisateurBean.user.mail}" required="true" styleClass="input"/></p>
+            <p class="label"><label>Nom</label></p>
+            <p><h:inputText label="Nom" id="nom" value="#{utilisateurBean.user.nom}" required="true" styleClass="input"/></p>
+            <p class="label"><label>Prénom</label></p>
+            <p><h:inputText label="Prénom" id="prenom" value="#{utilisateurBean.user.prenom}" required="true" styleClass="input"/></p>
+            <p class="label"><label>Téléphone</label></p>
+            <p><h:inputText label="Téléphone" id="telephone" value="#{utilisateurBean.user.telephone}" required="true" styleClass="input"/></p>
+            <p class="label"><label>Mot de passe</label></p>
+            <p><h:inputSecret label="Mot de passe" id="mdp" value="#{utilisateurBean.user.mdp}" required="true" styleClass="input"/></p>
+            <p><h:commandButton value="Valider" action="#{utilisateurBean.inscrireUtilisateur()}" styleClass="boutonvalider"/></p>
+     
+        </h:form>
     </body>
 </html>

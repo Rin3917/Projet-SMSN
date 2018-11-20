@@ -11,13 +11,10 @@ xmlns:h="http://java.sun.com/jsf/html">
 <h:body>
     
     <h:form>
-        
-        <h4>Authentification utilisateur</h4>
+        Vous vous ètes connecté avec succès
         <div>Identifiant <h:outputText
-                value="#{authentificationBean.identifiant}" /></div>
-        <div>Mot de passe <h:outputText
-                value="#{authentificationBean.motdepasse}" /></div>
-        <div><h:commandButton value="Deconnexion" action="authentification.jsf?faces-redirect=true" styleClass="boutonvalider"/></div>
+                value="#{authentificationBean.mail}" /></div>
+                <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>
     </h:form>
     
       

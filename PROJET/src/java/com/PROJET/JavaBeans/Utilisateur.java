@@ -6,6 +6,8 @@
 package com.PROJET.JavaBeans;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +50,23 @@ public class Utilisateur implements Serializable {
 
     public Utilisateur() {
     }
+    
+    public static String getEncodedPassword(String key) throws NoSuchAlgorithmException {
+byte[] uniqueKey = key.getBytes();
+byte[] hash ;
+hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+StringBuilder hashString = new StringBuilder();
+for ( int i = 0; i < hash.length; ++i ) {
+String hex = Integer.toHexString(hash[i]);
+if ( hex.length() == 1 ) {
+hashString.append('0');
+hashString.append(hex.charAt(hex.length()-1));
+} else {
+hashString.append(hex.substring(hex.length()-2));
+}
+}
+return hashString.toString();
+} 
 
     public Long getIdUtilisateur() {
         return idUtilisateur;
@@ -94,7 +113,16 @@ public class Utilisateur implements Serializable {
     }
 
     public void setMdp(String Mdp) {
-        this.Mdp = Mdp;
+        
+        
+        try{
+            this.Mdp = getEncodedPassword(Mdp) ;
+        }
+        catch(NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+       
     }
 
     public int getNbConnexion() {

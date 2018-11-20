@@ -15,14 +15,18 @@ xmlns:h="http://java.sun.com/jsf/html">
 <div class="formulaire">
 <div class="titreformulaire">Connexion &agrave; votre compte <span
 class="alerte">Les champs notés * sont obligatoires</span></div>
-<p class="label"><label>Identifiant *</label></p>
-<p><h:inputText label="Identifiant" id="identifiant" value="#{authentificationBean.identifiant}" required="true" styleClass="input"/></p>
-<p class="label"><label>Mot de passe *</label></p>
-<p><h:inputText label="Mot de passe" id="motdepasse" value="#{authentificationBean.motdepasse}" required="true" styleClass="input"/></p>
+<p class="label"><label>Adresse Mail </label></p>
+<p><h:inputText label="Adresse Mail" id="identifiant" value="#{authentificationBean.mail}" required="true" styleClass="input"/></p>
+<p class="label"><label>Mot de passe </label></p>
+<p><h:inputSecret label="Mot de passe" id="motdepasse" value="#{authentificationBean.motdepasse}" required="true" styleClass="input"/></p>
+
 <p><h:commandButton value="Valider" action="#{authentificationBean.validerAuthentification()}" styleClass="boutonvalider"/></p>
 </div>
    
 </div>
 </h:form>
+    <h:form>
+        <h:commandButton value="Créer un compte" action="inscription?faces-redirect=true" styleClass="boutonvalider"/>
+    </h:form>
 </h:body>
 </html>
