@@ -5,10 +5,10 @@
  */
 package com.PROJET.ManagedBeans;
 
-import com.PROJET.JavaBeans.PosteDeSecours;
 import com.PROJET.JavaBeans.Utilisateur;
+import java.io.Serializable;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,8 +18,8 @@ import javax.transaction.UserTransaction;
  *
  * @author Mathieu CHARRIERE
  */
-@Named @RequestScoped
-public class UtilisateurBean {
+@Named @SessionScoped
+public class UtilisateurBean implements Serializable {
     
       @Resource
     private UserTransaction utx;
@@ -27,6 +27,18 @@ public class UtilisateurBean {
     @PersistenceContext
     private EntityManager em;
 
-    Utilisateur user = new Utilisateur();
+   Utilisateur user = new Utilisateur();
+
+    public Utilisateur getUser() {
+        return user;
+    }
+
+    public void setUser(Utilisateur user) {
+        this.user = user;
+    }
+    
+    
+    
+    
     
 }

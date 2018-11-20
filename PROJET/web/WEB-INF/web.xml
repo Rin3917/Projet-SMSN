@@ -16,9 +16,10 @@
     </servlet-mapping>
     
     <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
+        <welcome-file>authentification.jsf</welcome-file>
     </welcome-file-list>
     
+
     <session-config>
         <session-timeout>
             30

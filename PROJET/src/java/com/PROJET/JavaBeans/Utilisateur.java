@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -22,13 +24,14 @@ import javax.persistence.Temporal;
 @Entity
 public class Utilisateur implements Serializable {
     
-    @Id
+    @Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUtilisateur;
     
     private String Nom;
     private String Prenom;
+    private String Mail;
     private int Telephone;
-    private String Mdp;
+    private String Mdp;    
     private int NbConnexion;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date DerniereConnexion ;
@@ -48,6 +51,14 @@ public class Utilisateur implements Serializable {
 
     public Long getIdUtilisateur() {
         return idUtilisateur;
+    }
+
+    public String getMail() {
+        return Mail;
+    }
+
+    public void setMail(String Mail) {
+        this.Mail = Mail;
     }
 
     public void setIdUtilisateur(Long idUtilisateur) {

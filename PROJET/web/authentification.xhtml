@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+<style type="text/css" media="screen">@import "css/styles.css";</style>
+<title>Authentification utilisateur</title>
+</h:head>
+<h:body>
+<h:form>
+<h4>Authentification utilisateur</h4>
+<div align="left"><h:graphicImage value="images/titre.png"/></div>
+<h:messages styleClass="message_erreur" id="message_erreur" />
+<div id="boite" style="width:400px">
+<div class="formulaire">
+<div class="titreformulaire">Connexion &agrave; votre compte <span
+class="alerte">Les champs notés * sont obligatoires</span></div>
+<p class="label"><label>Identifiant *</label></p>
+<p><h:inputText label="Identifiant" id="identifiant" value="#{authentificationBean.identifiant}" required="true" styleClass="input"/></p>
+<p class="label"><label>Mot de passe *</label></p>
+<p><h:inputText label="Mot de passe" id="motdepasse" value="#{authentificationBean.motdepasse}" required="true" styleClass="input"/></p>
+<p><h:commandButton value="Valider" action="#{authentificationBean.validerAuthentification()}" styleClass="boutonvalider"/></p>
+</div>
+   
+</div>
+</h:form>
+</h:body>
+</html>
