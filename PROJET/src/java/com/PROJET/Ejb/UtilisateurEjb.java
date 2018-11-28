@@ -7,6 +7,8 @@ package com.PROJET.Ejb;
 
 import com.PROJET.JavaBeans.Utilisateur;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.LocalBean;
@@ -40,7 +42,33 @@ public class UtilisateurEjb {
             
         }    
      }
+     
+     public List<Utilisateur> afficherTlm()
+     {
+         List<Utilisateur> listUser= new ArrayList<Utilisateur>();
+         
+           Query q = em.createQuery("SELECT u  FROM  Utilisateur u ");
+       
+        try
+        {
+            listUser = q.getResultList();
+            System.out.println("çca marche");
+         
+        }
+        catch(Exception e)
+        {
+         e.printStackTrace();
+        }
+         
+         return listUser;
+     }
 
+     public void setNbConnexion(String email)
+     {
+         Query q = em.createQuery("UPDATE Utilisateur u SET u.NbConnexion = u.NbConnexion+1 WHERE u.Mail= :email ");
+          q.setParameter("email", email);
+         int res =q.executeUpdate();
+     }
      public Boolean isPresent(String Mail,String mdp) 
      {
         Utilisateur user ;

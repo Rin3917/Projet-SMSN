@@ -25,6 +25,7 @@ public class AuthentificationBean implements Serializable{
 
 private String mail;
 private String motdepasse;
+private String redirection;
 
 @EJB
 private UtilisateurEjb monejb = new UtilisateurEjb();
@@ -37,7 +38,8 @@ public String validerAuthentification()
  
        if(monejb.isPresent(mail, motdepasse))
        { 
-           redirection="succes.jsf?faces-redirect=true";
+           this.monejb.setNbConnexion(mail);
+           redirection="succes.jsf";
          
        }
        else
@@ -49,6 +51,14 @@ public String validerAuthentification()
     
     
     return redirection;
+}
+public String redirection()
+{
+    if(!this.mail.equals("") && !this.motdepasse.equals(""))
+    {
+       return redirection; 
+    }
+    else return "authentification.jsf?faces-redirect=true";
 }
 
 
@@ -74,6 +84,14 @@ public String deconnexion()
 
     public void setMotdepasse(String motdepasse) {
         this.motdepasse = motdepasse;
+    }
+
+    public String getRedirection() {
+        return redirection;
+    }
+
+    public void setRedirection(String redirection) {
+        this.redirection = redirection;
     }
 
     

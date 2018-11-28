@@ -8,6 +8,7 @@ package com.PROJET.ManagedBeans;
 import com.PROJET.Ejb.UtilisateurEjb;
 import com.PROJET.JavaBeans.Utilisateur;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -37,7 +38,9 @@ public class UtilisateurBean implements Serializable {
     private EntityManager em;
     
 
-   Utilisateur user = new Utilisateur();
+   private Utilisateur user = new Utilisateur();
+   
+   private List<Utilisateur> listUtilisateur;
    
    public String inscrireUtilisateur()
    {
@@ -46,7 +49,8 @@ public class UtilisateurBean implements Serializable {
        try{
            if(isValidEmailAddress(user.getMail()))
            {
-           utilisateurEjb.ajouter(user);
+            this.user.setAvatar("img/Dolphin.jpg");
+            utilisateurEjb.ajouter(user);
                message = new FacesMessage("Vous vous ètes inscrit avec succès,vous pouvez maintenant vous connecter");
            }
            else{
@@ -64,6 +68,13 @@ public class UtilisateurBean implements Serializable {
        FacesContext.getCurrentInstance().addMessage(null, message);
        return redirection;
    }
+
+    public List<Utilisateur> getListUtilisateur() {
+        this.listUtilisateur=this.utilisateurEjb.afficherTlm();
+        return listUtilisateur;
+    }
+   
+
    
 public static boolean isValidEmailAddress(String email) {
    boolean result = true;
