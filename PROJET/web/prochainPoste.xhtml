@@ -5,13 +5,34 @@ Université de Franche-Comté
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
         <script src="menu.js"></script>
         <div>TODO write content</div>
-    </body>
+        
+        <p:dataTable var="obj" value="#{posteDeSecoursBean.afficherPds()}">
+
+            <p:column headerText="poste">
+                Poste <h:outputText value="#{obj.nomPoste}" /> <br/><br/>
+                du <h:outputText value="#{obj.dateDebut.date}"/> / <h:outputText value="#{obj.dateDebut.month+1}"/> / <h:outputText value="#{obj.dateDebut.year-100}"/>
+                au <h:outputText value="#{obj.dateFin.date}"/> / <h:outputText value="#{obj.dateFin.month+1}"/> / <h:outputText value="#{obj.dateFin.year-100}"/> <br/><br/>
+                a partir de <h:outputText value="#{obj.heureDebut}"/>
+                jusqu'a <h:outputText value="#{obj.heureFin}"/><br/><br/>
+          
+         
+                <h:outputText value="#{obj.commentaire}" /> 
+      </p:column>
+         
+  
+        </p:dataTable>
+        
+        <a href="ajoutPoste.jsf" name="lien"><input type="button" value="ajouter un poste"/></a>
+        <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>
+    </h:body>
 </html>

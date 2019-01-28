@@ -39,6 +39,9 @@ public class PosteDeSecours implements Serializable {
     
     @ManyToMany
     private List<Utilisateur> participant = new ArrayList<Utilisateur>();
+    
+ 
+    
 
     public PosteDeSecours() {
     }

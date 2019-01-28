@@ -1,32 +1,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-<style type="text/css" media="screen">@import "css/styles.css";</style>
-<title>Authentification utilisateur</title>
-</h:head>
-<h:body>
-<h:form>
-<h4>Authentification utilisateur</h4>
-<div align="left"><h:graphicImage value="images/titre.png"/></div>
-<h:messages styleClass="message_erreur" id="message_erreur" />
-<div id="boite" style="width:400px">
-<div class="formulaire">
-<div class="titreformulaire">Connexion &agrave; votre compte <span
-class="alerte">Les champs notés * sont obligatoires</span></div>
-<p class="label"><label>Adresse Mail </label></p>
-<p><h:inputText label="Adresse Mail" id="identifiant" value="#{authentificationBean.mail}" required="true" styleClass="input"/></p>
-<p class="label"><label>Mot de passe </label></p>
-<p><h:inputSecret label="Mot de passe" id="motdepasse" value="#{authentificationBean.motdepasse}" required="true" styleClass="input"/></p>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <style type="text/css" media="screen">@import "css/styles.css";</style>
+        <title>Authentification utilisateur</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/cssAuthentification.css" rel="stylesheet"/>    
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+    </h:head>
+    <h:body>
 
-<p><h:commandButton value="Valider" action="#{authentificationBean.validerAuthentification()}" styleClass="boutonvalider"/></p>
-</div>
-   
-</div>
-</h:form>
-    <h:form>
-        <h:commandButton value="Créer un compte" action="inscription" styleClass="boutonvalider"/>
-    </h:form>
-</h:body>
+        <header class="container-fluid header  ">
+            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
+        </header>
+        <section class="container-fluid middleSection">
+            <div class="container">
+                <div class="col-lg-4"></div>
+                <div class="monform col-lg-4">
+                    <h:form>
+                        <h4>Authentification utilisateur</h4>
+                        <h:messages styleClass="message_erreur" id="message_erreur" />
+
+                        <div class="formulaire">
+                            <div class="titreformulaire">Connexion &agrave; votre compte <br/>
+                                <span class="alerte">Les champs notés * sont obligatoires</span></div>
+                            <br/>
+                            Adresse Mail 
+                            <p><h:inputText label="Adresse Mail" id="identifiant" value="#{authentificationBean.mail}" required="true" styleClass="input"/></p>
+                            Mot de passe 
+                            <p><h:inputSecret label="Mot de passe" id="motdepasse" value="#{authentificationBean.motdepasse}" required="true" styleClass="input"/></p>
+                            <br/>
+                            <h:commandButton value="Valider" action="#{authentificationBean.validerAuthentification()}" class="btn-success btn-valider" />
+                        </div>
+                    </h:form>
+                    <a href="inscription.jsf">créer un compte</a>          
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </section>
+        <footer class="container-fluid footer">
+
+        </footer>
+    </h:body>
 </html>

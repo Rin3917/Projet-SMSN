@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -28,12 +30,24 @@ public class Message implements Serializable {
     private String Texte;
     private Boolean isRead;
     
-    @ManyToMany
-    private List<Utilisateur> Contact = new ArrayList<Utilisateur>();
+    @ManyToOne
+    private Utilisateur destinataire;
+    
+    @ManyToOne
+    private Utilisateur expediteur;
 
     public Message() {
     }
 
+    public Utilisateur getExpediteur() {
+        return expediteur;
+    }
+
+    public void setExpediteur(Utilisateur expediteur) {
+        this.expediteur = expediteur;
+    }
+
+    
     public Long getIdMessage() {
         return idMessage;
     }
@@ -66,13 +80,18 @@ public class Message implements Serializable {
         this.isRead = isRead;
     }
 
-    public List<Utilisateur> getContact() {
-        return Contact;
+    public Utilisateur getDestinataire() {
+        System.out.println("ça passe");
+        return destinataire;
     }
 
-    public void setContact(List<Utilisateur> Contact) {
-        this.Contact = Contact;
+    public void setDestinataire(Utilisateur destinataire) {
+        System.out.println("ça passe");
+        
+        this.destinataire = destinataire;
     }
+
+  
     
     
     

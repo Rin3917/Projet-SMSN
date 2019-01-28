@@ -7,8 +7,14 @@ package com.PROJET.ManagedBeans;
 
 import com.PROJET.Ejb.UtilisateurEjb;
 import com.PROJET.JavaBeans.Utilisateur;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -20,6 +26,8 @@ import javax.mail.internet.InternetAddress;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -37,6 +45,7 @@ public class UtilisateurBean implements Serializable {
     @PersistenceContext
     private EntityManager em;
     
+  
 
    private Utilisateur user = new Utilisateur();
    
@@ -86,6 +95,10 @@ public static boolean isValidEmailAddress(String email) {
    }
    return result;
 }
+
+
+ 
+ 
 
     public Utilisateur getUser() {
         return user;

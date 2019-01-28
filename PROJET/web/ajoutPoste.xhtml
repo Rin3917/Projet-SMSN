@@ -5,13 +5,33 @@ Université de Franche-Comté
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
         <script src="menu.js"></script>
-        <div>TODO write content</div>
-    </body>
+        
+ <br/>
+          <h:form>
+              Nom du poste : <p:inputText value="#{posteDeSecoursBean.pds.nomPoste}" maxlength="60"/><br/><br/>
+            date de début :<p:calendar value="#{posteDeSecoursBean.pds.dateDebut}" /><br/><br/>
+            date de fin : <p:calendar value="#{posteDeSecoursBean.pds.dateFin}" /><br/><br/>
+            heure de début :  <p:inputText value="#{posteDeSecoursBean.pds.heureDebut}" />exemple ("21h59")<br/><br/>
+            heure de fin :  <p:inputText  value="#{posteDeSecoursBean.pds.heureFin}"  />exemple ("02h45")<br/><br/> 
+            Lieu : <p:inputText value="#{posteDeSecoursBean.pds.lieu}" maxlength="60"/><br/><br/>
+            Sauveteur requis au minimum <p:inputNumber value="#{posteDeSecoursBean.pds.sauveteurMinRequis}" />
+            Commentaire <p:textEditor value="#{posteDeSecoursBean.pds.commentaire}"/>
+                                      
+            <p:commandButton action="#{posteDeSecoursBean.ajouterPds()}" value="valider" style="margin-right:20px;" ajax="false" />
+ 
+            
+        </h:form>
+        
+        <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>
+    </h:body>
 </html>

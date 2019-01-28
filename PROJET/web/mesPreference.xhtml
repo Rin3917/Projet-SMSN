@@ -5,13 +5,23 @@ Université de Franche-Comté
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="newcss.css" rel="stylesheet"></link> 
     </head>
     <body>
         <script src="menu.js"></script>
-        <div>TODO write content</div>
+        <h:form>
+            <br/>
+            <h:outputText value="#{authentificationBean.user.nom} "/>
+            <h:outputText value="#{authentificationBean.user.prenom}"/> <br/>
+            Votre email : <h:inputText value="#{authentificationBean.user.mail}"/>
+        </h:form>   
+        <a href="modifierPreference.jsf"><input type="button" value="Modifier mon avatar"/></a><br/>
+        <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>
     </body>
 </html>

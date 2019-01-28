@@ -5,9 +5,12 @@
  */
 package com.PROJET.ManagedBeans;
 
+import com.PROJET.Ejb.UtilisateurEjb;
 import com.PROJET.JavaBeans.Message;
 import com.PROJET.JavaBeans.PosteDeSecours;
+import java.util.List;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -26,6 +29,28 @@ public class PosteDeSecoursBean {
 
     @PersistenceContext
     private EntityManager em;
+    
+     @EJB
+    private UtilisateurEjb monejb = new UtilisateurEjb();
 
     PosteDeSecours pds = new PosteDeSecours();
+
+    public PosteDeSecours getPds() {
+        return pds;
+    }
+
+    public void setPds(PosteDeSecours pds) {
+        this.pds = pds;
+    }
+    public List<PosteDeSecours> afficherPds(){
+        return this.monejb.afficherPds();
+       
+    }
+    
+    public void ajouterPds(){
+        this.monejb.ajouterPds(this.pds);
+        
+    }
+    
+    
 }

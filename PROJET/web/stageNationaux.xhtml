@@ -5,13 +5,19 @@ Université de Franche-Comté
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
         <script src="menu.js"></script>
-        <div>TODO write content</div>
+        <div>Vous pouvez télécharger ici,  les documents décrivant les stages Nationaux SNSM 2007/2008.</div>
+        
+        <a href="http://crakdown.org/SNSM2/stages/STAGES_NATIONAUX_2008.xls"> Cliquez ici pour télécharger le fichier au Format EXCEL</a><br/>
+         <a href="http://crakdown.org/SNSM2/stages/STAGES_NATIONAUX_2008.pdf">Cliquez ici pour télécharger le fichier au Format PDF</a>
+        <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>
     </body>
 </html>
