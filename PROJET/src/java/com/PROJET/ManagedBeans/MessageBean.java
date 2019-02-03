@@ -72,7 +72,6 @@ public class MessageBean {
         System.out.println("destinataire : " + this.m.getDestinataire().getNom());
       System.out.println("expediteur : " +this.m.getExpediteur().getNom());
       this.monejb.ajouterMessager(this.m);
-      
     
         }
         catch(Exception e){

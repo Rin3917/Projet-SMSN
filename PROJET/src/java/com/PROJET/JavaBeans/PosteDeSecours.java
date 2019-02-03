@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -37,8 +38,8 @@ public class PosteDeSecours implements Serializable {
     private int SauveteurMinRequis;
     private String Commentaire;
     
-    @ManyToMany
-    private List<Utilisateur> participant = new ArrayList<Utilisateur>();
+    @OneToMany
+    private List<Participation> Participations = new ArrayList<Participation>();
     
  
     
@@ -118,13 +119,15 @@ public class PosteDeSecours implements Serializable {
         this.Commentaire = Commentaire;
     }
 
-    public List<Utilisateur> getParticipant() {
-        return participant;
+    public List<Participation> getParticipations() {
+        return Participations;
     }
 
-    public void setParticipant(List<Utilisateur> participant) {
-        this.participant = participant;
+    public void setParticipations(List<Participation> Participations) {
+        this.Participations = Participations;
     }
+
+
     
     
 }

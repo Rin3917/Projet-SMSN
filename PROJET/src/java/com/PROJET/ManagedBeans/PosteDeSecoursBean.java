@@ -47,8 +47,12 @@ public class PosteDeSecoursBean {
        
     }
     
-    public void ajouterPds(){
+    public String ajouterPds(){
         this.monejb.ajouterPds(this.pds);
+         return"prochainPoste.jsf?faces-redirect=true";
+    }
+    
+    public void supprimerPds(){
         
     }
     

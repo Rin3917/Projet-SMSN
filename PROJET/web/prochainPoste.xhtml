@@ -13,9 +13,7 @@ xmlns:h="http://java.sun.com/jsf/html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <script src="menu.js"></script>
-        <div>TODO write content</div>
-        
+        <script src="menu.js"></script> 
         <p:dataTable var="obj" value="#{posteDeSecoursBean.afficherPds()}">
 
             <p:column headerText="poste">
@@ -25,10 +23,17 @@ xmlns:h="http://java.sun.com/jsf/html">
                 a partir de <h:outputText value="#{obj.heureDebut}"/>
                 jusqu'a <h:outputText value="#{obj.heureFin}"/><br/><br/>
           
-         
+        
                 <h:outputText value="#{obj.commentaire}" /> 
       </p:column>
-         
+            <p:column>
+                 <h:form>
+                     <h:commandButton value="#{authentificationBean.Participe(obj,authentificationBean.user)}" action="#{authentificationBean.RenvoiFormParticipation(obj)}"/>
+                     <h:commandButton value="supprimer Poste de Secours" action="#{authentificationBean.supprimerPds(obj)}"/>   
+            </h:form>
+                
+            </p:column>
+            
   
         </p:dataTable>
         

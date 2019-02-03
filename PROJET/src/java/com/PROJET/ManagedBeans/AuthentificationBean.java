@@ -7,6 +7,8 @@ package com.PROJET.ManagedBeans;
 
 import com.PROJET.Ejb.UtilisateurEjb;
 import com.PROJET.JavaBeans.Message;
+import com.PROJET.JavaBeans.Participation;
+import com.PROJET.JavaBeans.PosteDeSecours;
 import com.PROJET.JavaBeans.Utilisateur;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,7 +41,50 @@ private String redirection;
 @EJB
 private UtilisateurEjb monejb = new UtilisateurEjb();
 private Utilisateur user;
+private PosteDeSecours pds;
 
+    public UtilisateurEjb getMonejb() {
+        return monejb;
+    }
+
+    public void setMonejb(UtilisateurEjb monejb) {
+        this.monejb = monejb;
+    }
+
+    public PosteDeSecours getPds() {
+        return pds;
+    }
+
+    public void setPds(PosteDeSecours pds) {
+        this.pds = pds;
+    }
+    public String supprimerPds(PosteDeSecours pds){
+        
+        this.monejb.supprimerPds(pds);
+        return"prochainPoste.jsf?faces-redirect=true";
+        
+    }
+
+    public String Participe(PosteDeSecours pds, Utilisateur user)
+    {
+        Boolean test = this.monejb.isParticipe(pds,user);
+        
+        if(test == true){
+             return"Modifier ma participation";
+        }
+        else{
+            return"Participer a ce poste";
+        }
+            
+
+    }
+    
+    public String RenvoiFormParticipation( PosteDeSecours pds){
+        this.pds=pds;
+            return"inscriptionPoste.jsf";
+        
+     
+    }
     public Utilisateur getUser() {
         return user;
     }

@@ -44,9 +44,7 @@ public class Utilisateur implements Serializable {
     @OneToMany
     private List<Article> mesArticle = new ArrayList<Article>();
     @ManyToMany
-    private List<PosteDeSecours> mesParticipations = new ArrayList <PosteDeSecours>();
-    @OneToMany
-    private List<Message> mesMessage = new ArrayList<Message>();
+    private List<Participation> mesParticipations = new ArrayList <Participation>();
 
     public Utilisateur() {
     }
@@ -173,21 +171,14 @@ return hashString.toString();
         this.mesArticle = mesArticle;
     }
 
-    public List<PosteDeSecours> getMesParticipations() {
+    public List<Participation> getMesParticipations() {
         return mesParticipations;
     }
 
-    public void setMesParticipations(List<PosteDeSecours> mesParticipations) {
+    public void setMesParticipations(List<Participation> mesParticipations) {
         this.mesParticipations = mesParticipations;
     }
 
-    public List<Message> getMesMessage() {
-        return mesMessage;
-    }
-
-    public void setMesMessage(List<Message> mesMessage) {
-        this.mesMessage = mesMessage;
-    }
     
     
 }

@@ -6,6 +6,8 @@
 package com.PROJET.Ejb;
 
 import com.PROJET.JavaBeans.Message;
+import com.PROJET.JavaBeans.Participation;
+import static com.PROJET.JavaBeans.Participation_.pds;
 import com.PROJET.JavaBeans.PosteDeSecours;
 import com.PROJET.JavaBeans.Utilisateur;
 import java.security.NoSuchAlgorithmException;
@@ -40,6 +42,79 @@ public class UtilisateurEjb {
         {
             
         }   
+     }
+     
+     public void supprimerPds(PosteDeSecours pds){
+     Query q = em.createQuery("DELETE FROM PosteDeSecours p WHERE p.idPosteDeSecours= :idPosteDeSecours");
+     q.setParameter("idPosteDeSecours", pds.getIdPosteDeSecours());
+     
+     q.executeUpdate();
+     }
+     
+     public boolean isParticipe(PosteDeSecours pds, Utilisateur user){
+         
+       Participation p;
+          Query q = em.createQuery("SELECT p  FROM  Participation p WHERE p.pds.idPosteDeSecours= :idPosteDeSecours AND p.Participant.idUtilisateur= :idUtilisateur");
+          q.setParameter("idPosteDeSecours", pds.getIdPosteDeSecours());
+           q.setParameter("idUtilisateur", user.getIdUtilisateur());
+       
+        try
+        {
+            p = (Participation) q.getSingleResult();
+            System.out.println("çca marche");
+            
+            return true;
+         
+        }
+        catch(Exception e)
+        {
+         return false;
+        }  
+     }
+     
+     public void updateParticipation(PosteDeSecours pds, Utilisateur user, Participation part){
+         
+          Participation p;
+          Query q = em.createQuery("SELECT p  FROM  Participation p WHERE p.pds.idPosteDeSecours= :idPosteDeSecours AND p.Participant.idUtilisateur= :idUtilisateur");
+          q.setParameter("idPosteDeSecours", pds.getIdPosteDeSecours());
+           q.setParameter("idUtilisateur", user.getIdUtilisateur());
+           
+          
+       
+        try
+        {
+            p = (Participation) q.getSingleResult();
+            
+              Query u = em.createQuery("UPDATE Participation p2 SET p2.heureDebut = :heureDebut, p2.heureFin= :heureFin WHERE p2.idParticipation= :idParticipation");
+          u.setParameter("heureDebut", part.getHeureDebut());
+          u.setParameter("heureFin", part.getHeureFin());
+          u.setParameter("idParticipation", p.getIdParticipation());
+         int res = u.executeUpdate();
+       
+         
+        }
+        catch(Exception e)
+        {
+         
+        }  
+         
+     }
+     
+     public void ajouterParticipation(Participation ptp){
+         
+         ptp.getPds().getParticipations().add(ptp);
+         ptp.getParticipant().getMesParticipations().add(ptp);
+         
+          try 
+        {
+            em.merge(ptp);
+            em.merge(ptp.getParticipant());
+            em.merge(ptp.getPds());
+        } catch (Exception e)
+        {
+            
+        }   
+         
      }
      
      public void ajouter(Utilisateur user) 
