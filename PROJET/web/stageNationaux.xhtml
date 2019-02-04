@@ -11,13 +11,45 @@ xmlns:h="http://java.sun.com/jsf/html">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/cssSucces.css" rel="stylesheet"/>    
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
     </head>
+    
     <body>
         <script src="menu.js"></script>
+           <script>
+        window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+    </script>
+       <header class="container-fluid header  ">
+            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
+        </header>
+        <section class="container-fluid">
+            <div class="container main">
         <div>Vous pouvez télécharger ici,  les documents décrivant les stages Nationaux SNSM 2007/2008.</div>
         
         <a href="http://crakdown.org/SNSM2/stages/STAGES_NATIONAUX_2008.xls"> Cliquez ici pour télécharger le fichier au Format EXCEL</a><br/>
          <a href="http://crakdown.org/SNSM2/stages/STAGES_NATIONAUX_2008.pdf">Cliquez ici pour télécharger le fichier au Format PDF</a>
         <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>
+            </div>
+        </section>
+           <footer class="container-fluid footer">
+
+        </footer>
     </body>
 </html>
