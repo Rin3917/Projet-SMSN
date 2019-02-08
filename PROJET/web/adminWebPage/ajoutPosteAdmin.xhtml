@@ -12,12 +12,12 @@ and open the template in the editor.
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="css/cssSucces.css" rel="stylesheet"/>    
+         <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="../css/cssSucces.css" rel="stylesheet"/>   
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
     </h:head>
     <h:body>
-        <script src="menu.js"></script> 
+        <script src="menuAdmin.js"></script> 
         <script>
             window.onscroll = function () {
                 myFunction()
@@ -39,23 +39,23 @@ and open the template in the editor.
             }
         </script>
         <header class="container-fluid header  ">
-            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
+            <img src="../img/snsm-art.jpg" class="banner" alt="banner"/>
         </header>
 
         <br/>
         <section class="container-fluid">
             <div class="container main">
                 <h:form>
-                    Nom du poste : <p:inputText value="#{posteDeSecoursBean.pds.nomPoste}" maxlength="60"/><br/><br/>
-                    date de début :<p:calendar value="#{posteDeSecoursBean.pds.dateDebut}" /><br/><br/>
-                    date de fin : <p:calendar value="#{posteDeSecoursBean.pds.dateFin}" /><br/><br/>
-                    heure de début :  <p:inputText value="#{posteDeSecoursBean.pds.heureDebut}" />exemple ("21h59")<br/><br/>
-                    heure de fin :  <p:inputText  value="#{posteDeSecoursBean.pds.heureFin}"  />exemple ("02h45")<br/><br/> 
-                    Lieu : <p:inputText value="#{posteDeSecoursBean.pds.lieu}" maxlength="60"/><br/><br/>
-                    Sauveteur requis au minimum <p:inputNumber value="#{posteDeSecoursBean.pds.sauveteurMinRequis}" />
-                    Commentaire <p:textEditor value="#{posteDeSecoursBean.pds.commentaire}"/>
+                    Nom du poste : <p:inputText value="#{authentificationBean.pds.nomPoste}" maxlength="60"/><br/><br/>
+                    date de début :<p:calendar value="#{authentificationBean.pds.dateDebut}" /><br/><br/>
+                    date de fin : <p:calendar value="#{authentificationBean.pds.dateFin}" /><br/><br/>
+                    heure de début :  <p:inputText value="#{authentificationBean.pds.heureDebut}" />exemple ("21h59")<br/><br/>
+                    heure de fin :  <p:inputText  value="#{authentificationBean.pds.heureFin}"  />exemple ("02h45")<br/><br/> 
+                    Lieu : <p:inputText value="#{authentificationBean.pds.lieu}" maxlength="60"/><br/><br/>
+                    Sauveteur requis au minimum <p:inputNumber value="#{authentificationBean.pds.sauveteurMinRequis}" />
+                    Commentaire <h:inputTextarea value="#{authentificationBean.pds.commentaire}"/>
 
-                    <p:commandButton action="#{posteDeSecoursBean.ajouterPds()}" value="valider" style="margin-right:20px;" ajax="false" />
+                    <p:commandButton action="#{authentificationBean.ajouterPds()}" value="valider" style="margin-right:20px;" ajax="false" />
 
 
                 </h:form>

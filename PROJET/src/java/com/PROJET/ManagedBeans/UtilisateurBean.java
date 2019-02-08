@@ -59,6 +59,8 @@ public class UtilisateurBean implements Serializable {
            if(isValidEmailAddress(user.getMail()))
            {
             this.user.setAvatar("img/Dolphin.jpg");
+            this.user.setIsAdmin(Boolean.FALSE);
+            this.user.setIsConfirmed(Boolean.FALSE);
             utilisateurEjb.ajouter(user);
                message = new FacesMessage("Vous vous ètes inscrit avec succès,vous pouvez maintenant vous connecter");
            }

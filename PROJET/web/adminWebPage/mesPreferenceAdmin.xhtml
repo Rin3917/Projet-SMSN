@@ -6,17 +6,17 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:p="http://primefaces.org/ui"
-xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-          <link href="css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="css/cssSucces.css" rel="stylesheet"/>    
+          <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="../css/cssSucces.css" rel="stylesheet"/>    
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
     </head>
     <body>
-         <script src="menu.js"></script> 
+        <script src="menuAdmin.js"></script>
            <script>
         window.onscroll = function() {myFunction()};
 
@@ -36,13 +36,20 @@ function myFunction() {
 }
     </script>
        <header class="container-fluid header  ">
-            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
+            <img src="../img/snsm-art.jpg" class="banner" alt="banner"/>
         </header>
-    <section class="container-fluid">
+        <section class="container-fluid">
             <div class="container main">
+        <h:form>
+            <br/>
+            <h:outputText value="#{authentificationBean.user.nom} "/>
+            <h:outputText value="#{authentificationBean.user.prenom}"/> <br/>
+            Votre email : <h:inputText value="#{authentificationBean.user.mail}"/>
+        </h:form>   
+        <a href="modifierPreference.jsf"><input type="button" value="Modifier mon avatar"/></a><br/>
         <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>
             </div>
-    </section>
+        </section>
            <footer class="container-fluid footer">
 
         </footer>

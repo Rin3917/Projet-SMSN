@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licence pro informatique 2018/2019
+Université de Franche-Comté
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+       <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="../css/cssSucces.css" rel="stylesheet"/>    
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+    </head>
+    <body>
+          <script src="menuAdmin.js"></script> 
+           <script>
+        window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+    </script>
+       <header class="container-fluid header  ">
+            <img src="../img/snsm-art.jpg" class="banner" alt="banner"/>
+        </header>
+          <section class="container-fluid">
+            <div class="container main">
+        Votre avatar actuel : <br/>
+        <img src="#{authentificationBean.user.avatar}" alt="monAvatar"/>
+        #{authentificationBean.user.nom}
+        <p>
+            Choisissez votre image (format Gif ou JPG). Le nom du fichier ne doit pas contenir de caractère espace.<br/>
+            Cliquez ensuite sur <b>Envoyer</b> pour modifier votre avatar :
+        </p>
+        <h:form enctype="multipart/form-data">
+    <p:growl id="messages" showDetail="true" />
+     
+    <p:fileUpload value="#{authentificationBean.file}" mode="simple" skinSimple="true"/>
+     
+    <br /> <br />
+     
+    <p:commandButton value="Submit" ajax="false" action="#{authentificationBean.upload()}" disabled="false" />
+</h:form>
+          <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>
+            </div>
+          </section>
+           
+          <footer class="container-fluid footer">
+
+        </footer>
+    </body>
+</html>

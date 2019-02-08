@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licence pro informatique 2018/2019
+Université de Franche-Comté
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="../css/cssSucces.css" rel="stylesheet"/>     
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <script src="menuAdmin.js"></script> 
+           <script>
+        window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+    </script>
+       <header class="container-fluid header  ">
+            <img src="../img/snsm-art.jpg" class="banner" alt="banner"/>
+        </header>
+        <section class="container-fluid">
+            <div class="container main">
+        <p:dataTable var="obj" value="#{posteDeSecoursBean.afficherPds()}">
+
+            <p:column headerText="poste">
+                Poste <h:outputText value="#{obj.nomPoste}" /> <br/><br/>
+                du <h:outputText value="#{obj.dateDebut.date}"/> / <h:outputText value="#{obj.dateDebut.month+1}"/> / <h:outputText value="#{obj.dateDebut.year-100}"/>
+                au <h:outputText value="#{obj.dateFin.date}"/> / <h:outputText value="#{obj.dateFin.month+1}"/> / <h:outputText value="#{obj.dateFin.year-100}"/> <br/><br/>
+                a partir de <h:outputText value="#{obj.heureDebut}"/>
+                jusqu'a <h:outputText value="#{obj.heureFin}"/><br/><br/>
+          
+        
+                <h:outputText value="#{obj.commentaire}" /> 
+      </p:column>
+            <p:column>
+                 <h:form>
+                     <h:commandButton value="#{authentificationBean.Participe(obj,authentificationBean.user)}" action="#{authentificationBean.RenvoiFormParticipation(obj)}"/>
+                     <h:commandButton value="supprimer Poste de Secours" action="#{authentificationBean.supprimerPds(obj)}"/>   
+            </h:form>
+                
+            </p:column>
+            
+  
+        </p:dataTable>
+        
+        <a href="ajoutPoste.jsf" name="lien"><input type="button" value="ajouter un poste"/></a>
+        <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>
+            </div>
+        </section>
+           <footer class="container-fluid footer">
+
+        </footer>
+    </h:body>
+</html>

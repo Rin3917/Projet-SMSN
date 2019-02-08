@@ -24,7 +24,7 @@ body{
  text-align: center;
 }
 .monform{
-    padding: 5px;
+    padding: 5x;
     margin-top: 2em;
     text-align: center;
     min-width: 33%;
@@ -74,7 +74,7 @@ body{
 {
      background-color : rgb(0, 51, 102);
      position:absolute;
-     height: 10em;
+     height: 7em;
 bottom:0px;
 left:0px;
 right: 0px;

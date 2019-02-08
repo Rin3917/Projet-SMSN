@@ -8,8 +8,6 @@
 document.write('\
 <div id="navbar">\
 <a href="ListeSauveteur.jsf">ListeSauveteur</a>\
-  <a href="ajoutPoste.jsf">ajoutPoste</a>\
-    <a href="ajoutSauveteur.jsf">ajoutSauveteur</a>\
         <a href="ancienPoste.jsf">ancienPoste</a>\
         <a href="derniereMinute.jsf">derniereMinute</a>\
         <a href="ecrireMessage.jsf">ecrireMessage</a>\

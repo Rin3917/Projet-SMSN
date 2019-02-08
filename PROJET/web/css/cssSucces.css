@@ -35,7 +35,7 @@ body{
     border: solid rgb(209, 209, 224) 1px;
 }
 .middleSection{
-   
+ 
 }
 #navbar {
   overflow: hidden;
@@ -55,7 +55,11 @@ body{
 
 /* Page content */
 .content {
+    
   padding: 16px;
+}
+section{
+    padding-top: 2em;
 }
 
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
