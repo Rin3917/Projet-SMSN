@@ -48,6 +48,12 @@ public class UtilisateurEjb {
 
         q.executeUpdate();
     }
+      public void supprimerMessage(Message msg) {
+        Query q = em.createQuery("DELETE FROM Message p WHERE p.idMessage= :idMessage");
+        q.setParameter("idMessage", msg.getIdMessage());
+
+        q.executeUpdate();
+    }
 
     public boolean isParticipe(PosteDeSecours pds, Utilisateur user) {
 

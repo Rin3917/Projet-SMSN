@@ -71,6 +71,19 @@ public class AuthentificationBean implements Serializable {
 
     }
 
+    public String supprimerMessage(Message msg) {
+
+        if (this.user.getIsAdmin() == false) {
+            this.monejb.supprimerMessage(msg);
+            return "message.jsf?faces-redirect=true";
+
+        } else {
+            this.monejb.supprimerMessage(msg);
+            return "messageAdmin.jsf?faces-redirect=true";
+        }
+
+    }
+
     public String ajouterPds() {
         if (this.user.getIsAdmin() == false) {
             return this.deconnexion();
@@ -82,31 +95,31 @@ public class AuthentificationBean implements Serializable {
         }
 
     }
-    public String DeleteUser(Utilisateur u){
-          if (this.user.getIsAdmin() == false) {
+
+    public String DeleteUser(Utilisateur u) {
+        if (this.user.getIsAdmin() == false) {
             return this.deconnexion();
 
+        } else {
+            this.monejb.supprimerUser(u);
+            return "ajoutSauveteurAdmin.jsf?faces-redirect=true";
         }
-         else{
-              this.monejb.supprimerUser(u);
-             return "ajoutSauveteurAdmin.jsf?faces-redirect=true";
-         }
     }
-    public String ConfirmerUtilisateur(Utilisateur u){
-        
-         if (this.user.getIsAdmin() == false) {
+
+    public String ConfirmerUtilisateur(Utilisateur u) {
+
+        if (this.user.getIsAdmin() == false) {
             return this.deconnexion();
 
+        } else {
+            this.monejb.ConfirmUser(u);
+            return "ajoutSauveteurAdmin.jsf?faces-redirect=true";
         }
-         else{
-              this.monejb.ConfirmUser(u);
-             return "ajoutSauveteurAdmin.jsf?faces-redirect=true";
-         }
-       
+
     }
-    
-    public List<Utilisateur> getNonConfirmedUser(){
-       return this.monejb.getNonConfirmedUsers();
+
+    public List<Utilisateur> getNonConfirmedUser() {
+        return this.monejb.getNonConfirmedUsers();
     }
 
     public String Participe(PosteDeSecours pds, Utilisateur user) {
@@ -121,9 +134,15 @@ public class AuthentificationBean implements Serializable {
     }
 
     public String RenvoiFormParticipation(PosteDeSecours pds) {
-        this.pds = pds;
-        return "inscriptionPoste.jsf";
 
+        if (this.user.getIsAdmin() == false) {
+            this.pds = pds;
+            return "inscriptionPoste.jsf";
+
+        } else {
+            this.pds = pds;
+            return "inscriptionPosteAdmin.jsf";
+        }
     }
 
     public Utilisateur getUser() {

@@ -9,7 +9,7 @@ document.write('\
 <div id="navbar">\
 <a href="ListeSauveteurAdmin.jsf">ListeSauveteur</a>\
   <a href="ajoutPosteAdmin.jsf">ajoutPoste</a>\
-    <a href="ajoutSauveteurAdmin.jsf">ajoutSauveteur</a>\
+    <a href="ajoutSauveteurAdmin.jsf">ValidationSauveteur</a>\
         <a href="ancienPosteAdmin.jsf">ancienPoste</a>\
         <a href="derniereMinuteAdmin.jsf">derniereMinute</a>\
         <a href="ecrireMessageAdmin.jsf">ecrireMessage</a>\
