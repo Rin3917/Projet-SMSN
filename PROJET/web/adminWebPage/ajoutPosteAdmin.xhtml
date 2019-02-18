@@ -10,57 +10,60 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-         <link href="../css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="../css/cssSucces.css" rel="stylesheet"/>   
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+       <style type="text/css" media="screen">@import "css/styles.css";</style>
+            <title>homePage</title>
+            <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+            <link href="../css/cssSucces.css" rel="stylesheet"/>    
+            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
     </h:head>
     <h:body>
-        <script src="menuAdmin.js"></script> 
-        <script>
-            window.onscroll = function () {
-                myFunction()
-            };
+       
+      
+         <script src="header.js"></script>
+        <nav class="nav navbar-link">
+
+            
+ <script src="menuAdmin.js"></script> 
+ <script>
+     // When the user scrolls the page, execute myFunction 
+window.onscroll = function() {myFunction()};
 
 // Get the navbar
-            var navbar = document.getElementById("navbar");
+var navbar = document.getElementById("navbar");
 
 // Get the offset position of the navbar
-            var sticky = navbar.offsetTop;
+var sticky = navbar.offsetTop;
 
 // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-            function myFunction() {
-                if (window.pageYOffset > sticky) {
-                    navbar.classList.add("sticky")
-                } else {
-                    navbar.classList.remove("sticky");
-                }
-            }
-        </script>
-        <header class="container-fluid header  ">
-            <img src="../img/snsm-art.jpg" class="banner" alt="banner"/>
-        </header>
-
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+ </script>
+       </nav>
         <br/>
         <section class="container-fluid">
-            <div class="container main">
+            <div class="container main ajoutPoste">
                 <h:form>
-                    Nom du poste : <p:inputText value="#{authentificationBean.pds.nomPoste}" maxlength="60"/><br/><br/>
-                    date de début :<p:calendar value="#{authentificationBean.pds.dateDebut}" /><br/><br/>
-                    date de fin : <p:calendar value="#{authentificationBean.pds.dateFin}" /><br/><br/>
-                    heure de début :  <p:inputText value="#{authentificationBean.pds.heureDebut}" />exemple ("21h59")<br/><br/>
-                    heure de fin :  <p:inputText  value="#{authentificationBean.pds.heureFin}"  />exemple ("02h45")<br/><br/> 
-                    Lieu : <p:inputText value="#{authentificationBean.pds.lieu}" maxlength="60"/><br/><br/>
-                    Sauveteur requis au minimum <p:inputNumber value="#{authentificationBean.pds.sauveteurMinRequis}" />
-                    Commentaire <h:inputTextarea value="#{authentificationBean.pds.commentaire}"/>
+                    <span class="elementAjoutPoste">Nom du poste : </span><p:inputText value="#{authentificationBean.pds.nomPoste}" maxlength="60"/><br/><br/>
+                     <span class="elementAjoutPoste">date de début :</span><p:calendar value="#{authentificationBean.pds.dateDebut}" /><br/><br/>
+                    <span class="elementAjoutPoste"> date de fin : </span><p:calendar value="#{authentificationBean.pds.dateFin}" /><br/><br/>
+                    <span class="elementAjoutPoste"> heure de début : </span> <p:inputText value="#{authentificationBean.pds.heureDebut}" />  exemple : ("21h59")<br/><br/>
+                    <span class="elementAjoutPoste"> heure de fin : </span> <p:inputText  value="#{authentificationBean.pds.heureFin}"  />  exemple : ("02h45")<br/><br/> 
+                    <span class="elementAjoutPoste"> Lieu : </span><p:inputText value="#{authentificationBean.pds.lieu}" maxlength="60"/><br/><br/>
+                     <span class="elementAjoutPoste">Sauveteur requis au minimum :</span> <p:inputNumber value="#{authentificationBean.pds.sauveteurMinRequis}" /><br/><br/>
+                     <span class="elementAjoutPoste">Commentaire :</span><br/><h:inputTextarea style="min-width : 300px; min-height: 150px;" value="#{authentificationBean.pds.commentaire}"/><br/><br/>
 
                     <p:commandButton action="#{authentificationBean.ajouterPds()}" value="valider" style="margin-right:20px;" ajax="false" />
 
 
                 </h:form>
 
-                <h:form>   <div><h:commandButton value="Deconnexion" action="#{authentificationBean.deconnexion()}" styleClass="boutonvalider"/></div>   </h:form>        
+          <br/><br/>    
             </div>
         </section>
 

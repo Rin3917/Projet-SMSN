@@ -10,16 +10,24 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-          <link href="css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="css/cssSucces.css" rel="stylesheet"/>    
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+          <style type="text/css" media="screen">@import "css/styles.css";</style>
+            <title>homePage</title>
+            <link href="css/bootstrap.min.css" rel="stylesheet"/>
+            <link href="css/cssSucces.css" rel="stylesheet"/>    
+            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+            <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
     </head>
     <body>
-            <script src="menu.js"></script> 
-           <script>
-        window.onscroll = function() {myFunction()};
+           
+         
+       <header class="container-fluid header  ">
+             <h1 class="titre">SNSM Montbéliard</h1>
+            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
+        </header>
+         <script src="menu.js"></script> 
+          <script>
+     // When the user scrolls the page, execute myFunction 
+window.onscroll = function() {myFunction()};
 
 // Get the navbar
 var navbar = document.getElementById("navbar");
@@ -29,16 +37,13 @@ var sticky = navbar.offsetTop;
 
 // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
 function myFunction() {
-  if (window.pageYOffset > sticky) {
+  if (window.pageYOffset >= sticky) {
     navbar.classList.add("sticky")
   } else {
     navbar.classList.remove("sticky");
   }
 }
-    </script>
-       <header class="container-fluid header  ">
-            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
-        </header>
+ </script>
             <section class="container-fluid">
             <div class="container main">
         <h:form>
