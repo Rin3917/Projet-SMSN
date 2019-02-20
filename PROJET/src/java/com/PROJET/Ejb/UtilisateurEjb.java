@@ -198,6 +198,27 @@ public class UtilisateurEjb {
         return user;
 
     }
+    
+     public List<Utilisateur> getParticipants(PosteDeSecours pds){
+         
+         List<Utilisateur> participants = new ArrayList<Utilisateur>();
+         
+         for(Participation part : pds.getParticipations()){
+              Query q = em.createQuery("SELECT u  FROM  Utilisateur u WHERE u.idUtilisateur :idUtilisateur ");
+        q.setParameter("idUtilisateur", part.getParticipant().getIdUtilisateur() );
+ 
+        try {
+           participants.add((Utilisateur) q.getSingleResult());
+            System.out.println("debugGetParticipants");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+             
+         }
+
+        return participants;
+    }
 
     public List<Utilisateur> afficherTlm() {
         List<Utilisateur> listUser = new ArrayList<Utilisateur>();

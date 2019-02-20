@@ -10,6 +10,7 @@ import com.PROJET.JavaBeans.Participation;
 import com.PROJET.JavaBeans.PosteDeSecours;
 import com.PROJET.JavaBeans.Utilisateur;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -44,6 +45,9 @@ public class ParticipationBean {
 
     public void setParticipation(Participation participation) {
         this.participation = participation;
+    }
+    public List<Utilisateur> getParticipants(PosteDeSecours pds){
+        return this.monejb.getParticipants(pds);
     }
 
     public String ajouterParticipation(PosteDeSecours pds, Utilisateur user) {

@@ -44,9 +44,10 @@ function myFunction() {
             <div class="container main">
         <h:form>
             <br/>
-            <h:outputText value="#{authentificationBean.user.nom} "/>
-            <h:outputText value="#{authentificationBean.user.prenom}"/> <br/>
-            Votre email : <h:inputText value="#{authentificationBean.user.mail}"/>
+            <img style="width: 50px; height: 50px;" src="../#{authentificationBean.user.avatar}"/><br/><br/>
+           Nom : <h:outputText value="#{authentificationBean.user.nom} "/><br/>
+           Prenom : <h:outputText value="#{authentificationBean.user.prenom}"/> <br/>
+           Mail :<h:outputText value="#{authentificationBean.user.mail}"/><br/><br/>
         </h:form>   
         <a href="modifierPreference.jsf"><input type="button" value="Modifier mon avatar"/></a><br/>
             </div>

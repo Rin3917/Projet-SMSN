@@ -7,16 +7,17 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <head>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
         <style type="text/css" media="screen">@import "css/styles.css";</style>
             <title>homePage</title>
             <link href="../css/bootstrap.min.css" rel="stylesheet"/>
             <link href="../css/cssSucces.css" rel="stylesheet"/>    
             <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
        
       <script src="header.js"></script>
          <script src="menuAdmin.js"></script>
@@ -41,27 +42,48 @@ function myFunction() {
  </script>
         <section class="container-fluid">
             <div class="container main">
-                <p:dataTable var="obj" value="#{utilisateurBean.listUtilisateur}">
 
-                    <p:column headerText=" Nom ">
-                        <h:outputText value="#{obj.nom}" /> 
-                    </p:column> 
+                <h:form>
+                    <p:dataTable  var="obj" id="utilisateurs" value="#{utilisateurBean.listUtilisateur}" rows="10"
+                                  paginator="true"
+                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                  rowsPerPageTemplate="5,10,15" >
+                        
+                       
+
+
+                        <p:column headerText="Avatar">
+                             <img style="width: 50px; height: 50px;" src="../#{obj.avatar}"/>
+                        </p:column>
+                      
+                         <p:column filterBy="#{obj.nom}" headerText="nom"  filterMatchMode="contains">
+                            <h:outputText value="#{obj.nom}" />
+                        </p:column>
+                        
+                        <p:column filterBy="#{obj.prenom}" headerText="prenom" filterMatchMode="contains">
+                            <h:outputText value="#{obj.prenom}" />
+                        </p:column>
+                        <p:column filterBy="#{obj.mail}" headerText="mail"  filterMatchMode="contains">
+                            <h:outputText value="#{obj.mail}" />
+                        </p:column>
+
                    
-                    <p:column headerText=" prenom ">
-                        <h:outputText value="#{obj.prenom}" /> 
-                    </p:column> 
+                        <f:facet name="paginatorTopLeft">
+                            <p:commandButton type="button" icon="pi pi-refresh" />
+                        </f:facet>
 
-                    <p:column headerText=" avatar ">
-                        <img style=" height: 20px; width: 20px;" src="../#{obj.avatar}"/>
-                    </p:column> 
-                </p:dataTable>
+                        <f:facet name="paginatorBottomRight">
+                            <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                        </f:facet>
 
-          
+                    </p:dataTable>
+                </h:form>
+
             </div>
         </section>
 
         <footer class="container-fluid footer">
 
         </footer>
-    </body>
+    </h:body>
 </html>

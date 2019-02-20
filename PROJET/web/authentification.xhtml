@@ -7,22 +7,26 @@
         <style type="text/css" media="screen">@import "css/styles.css";</style>
         <title>Authentification utilisateur</title>
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
         <link href="css/cssAuthentification.css" rel="stylesheet"/>    
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
+        
+
+
     </h:head>
     <h:body>
 
-       <header class="container-fluid header  ">
-             <h1 class="titre">SNSM Montbéliard</h1>
-            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
-        </header>
+        <h1 class="titre">SNSM Montbéliard</h1>
         <section class="container-fluid middleSection">
             <div class="container">
-                <div class="col-lg-4"></div>
-                <div class="monform col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-4  col-xs-4"></div>
+                <div class="monform col-lg-4 col-md-4 col-sm-4  col-xs-4">
                     <h:form>
-                        <h4>Authentification utilisateur</h4>
+                        <div class="topForm">
+                        <h4 style="font-weight: bold;">Authentification utilisateur</h4>
+                        </div>
+                       <br/>
                         <h:messages styleClass="message_erreur" id="message_erreur" />
 
                         <div class="formulaire">
@@ -30,20 +34,24 @@
                                 <span class="alerte">Les champs notés * sont obligatoires</span></div>
                             <br/>
                             Adresse Mail 
-                            <p><h:inputText label="Adresse Mail" id="identifiant" value="#{authentificationBean.mail}" required="true" styleClass="input"/></p>
+                            <p><span class="icone glyphicon glyphicon-envelope"> <h:inputText class="formInput" label="Adresse Mail" id="identifiant" value="#{authentificationBean.mail}" required="true" styleClass="input"/></span></p>
                             Mot de passe 
-                            <p><h:inputSecret label="Mot de passe" id="motdepasse" value="#{authentificationBean.motdepasse}" required="true" styleClass="input"/></p>
+                            <p><span class="icone glyphicon glyphicon-asterisk"><h:inputSecret label="Mot de passe" id="motdepasse" class="formInput" value="#{authentificationBean.motdepasse}" required="true" styleClass="input"/></span></p>
                             <br/>
-                            <h:commandButton value="Valider" action="#{authentificationBean.validerAuthentification()}" class="btn-success btn-valider" />
+                           
+                            <h:commandButton value="Valider" style="border-radius:0px; border:none; margin-left: 2em; margin-left: 12.7%;  width:74.5%;" action="#{authentificationBean.validerAuthentification()}" class="btn-success btn-valider btn-lg" />
+                             
                         </div>
+                        <br/> <br/>  <br/>
+                          <a href="inscription.jsf">créer un compte</a>  
                     </h:form>
-                    <a href="inscription.jsf">créer un compte</a>          
+                  
+                           
                 </div>
-                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-4 col-md-4 col-sm-4  col-xs-4"></div>
             </div>
         </section>
-        <footer class="container-fluid footer">
-
-        </footer>
+       
     </h:body>
 </html>

@@ -7,65 +7,87 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <head>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
         <style type="text/css" media="screen">@import "css/styles.css";</style>
         <title>homePage</title>
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
         <link href="css/cssSucces.css" rel="stylesheet"/>    
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
 
-    </head>
-    <body>
-        <header class="container-fluid header  ">
-              <h1 class="titre">SNSM Montbéliard</h1>
-            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
-        </header>
+    </h:head>
+    <h:body>
+        <script src="header.js"></script>
         <script src="menu.js"></script>
- <script>
-     // When the user scrolls the page, execute myFunction 
-window.onscroll = function() {myFunction()};
+        <script>
+            // When the user scrolls the page, execute myFunction 
+            window.onscroll = function () {
+                myFunction()
+            };
 
-// Get the navbar
-var navbar = document.getElementById("navbar");
+            // Get the navbar
+            var navbar = document.getElementById("navbar");
 
-// Get the offset position of the navbar
-var sticky = navbar.offsetTop;
+            // Get the offset position of the navbar
+            var sticky = navbar.offsetTop;
 
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
-}
- </script>
-     
+            // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+        </script>
+
 
         <section class="container-fluid">
             <div class="container main">
-                <p:dataTable var="obj" value="#{utilisateurBean.listUtilisateur}">
 
-                    <p:column headerText="Nom" >
-                        <h:outputText value="#{obj.nom}" /> 
-                    </p:column> 
+                <h:form>
+                    <p:dataTable  var="obj" id="utilisateurs" value="#{utilisateurBean.listUtilisateur}" rows="10"
+                                  paginator="true"
+                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                  rowsPerPageTemplate="5,10,15" >
+                        
+                       
 
-                    <p:column headerText="prenom"  >
-                        <h:outputText value="#{obj.prenom}" /> 
-                    </p:column> 
 
+                        <p:column headerText="Avatar">
+                            <h:graphicImage style="height:50px; width: 50px;" value="#{obj.avatar}" />
+                        </p:column>
+                      
+                         <p:column filterBy="#{obj.nom}" headerText="nom"  filterMatchMode="contains">
+                            <h:outputText value="#{obj.nom}" />
+                        </p:column>
+                        
+                        <p:column filterBy="#{obj.prenom}" headerText="prenom" filterMatchMode="contains">
+                            <h:outputText value="#{obj.prenom}" />
+                        </p:column>
+                        <p:column filterBy="#{obj.mail}" headerText="mail"  filterMatchMode="contains">
+                            <h:outputText value="#{obj.mail}" />
+                        </p:column>
 
-                    <p:column headerText="avatar"  >
-                        <img style=" height: 70; width: 70px;" src="#{obj.avatar}"/>
-                    </p:column> 
-                </p:dataTable>
+                   
+                        <f:facet name="paginatorTopLeft">
+                            <p:commandButton type="button" icon="pi pi-refresh" />
+                        </f:facet>
+
+                        <f:facet name="paginatorBottomRight">
+                            <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                        </f:facet>
+
+                    </p:dataTable>
+                </h:form>
+
             </div>
         </section>
 
         <footer class="container-fluid footer">
 
         </footer>
-    </body>
+    </h:body>
 </html>

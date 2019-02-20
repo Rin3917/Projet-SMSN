@@ -45,12 +45,18 @@ public class UtilisateurBean implements Serializable {
     @PersistenceContext
     private EntityManager em;
     
+  private int ligneParPage = 3;
   
 
    private Utilisateur user = new Utilisateur();
    
    private List<Utilisateur> listUtilisateur;
    
+   public String getNomPrenom( Utilisateur u){
+       String NomPrenom;
+       NomPrenom = u.getNom()+" "+u.getPrenom();
+       return NomPrenom;
+   }
    public String inscrireUtilisateur()
    {
        FacesMessage message;
@@ -58,7 +64,7 @@ public class UtilisateurBean implements Serializable {
        try{
            if(isValidEmailAddress(user.getMail()))
            {
-            this.user.setAvatar("img/Dolphin.jpg");
+            this.user.setAvatar("img/product-image-447886318_360x.jpg0.6331622597772915.jpg");
             this.user.setIsAdmin(Boolean.FALSE);
             this.user.setIsConfirmed(Boolean.FALSE);
             utilisateurEjb.ajouter(user);
@@ -108,6 +114,14 @@ public static boolean isValidEmailAddress(String email) {
 
     public void setUser(Utilisateur user) {
         this.user = user;
+    }
+
+    public int getLigneParPage() {
+        return ligneParPage;
+    }
+
+    public void setLigneParPage(int ligneParPage) {
+        this.ligneParPage = ligneParPage;
     }
     
     

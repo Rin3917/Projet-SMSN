@@ -44,23 +44,23 @@ function myFunction() {
  </script>
         <section class="container-fluid">
             <div class="container main">
+                <div class="messagerie">
+                <h3 style="font-weight: bold; text-align: center;">Messagerie</h3>
+                <br/>
                 <h:form>
 
-                    Nom destinataire
-
-
-
-                    <h:selectOneMenu value = "#{messageBean.mondestinataire}"> 
+                    
+                   Destinataire <h:selectOneMenu value = "#{messageBean.mondestinataire}"> 
                         <f:selectItems value="#{utilisateurBean.listUtilisateur}" var="u" itemValue="#{u.idUtilisateur}"  itemLabel="#{u.nom}"/>
                     </h:selectOneMenu> 
-
                     <br/>
-                    Veuillez donnez un titre a votre message <h:inputText value="#{messageBean.m.titre}"/> <br/>
-                    <h:inputTextarea value="#{messageBean.m.texte}"/> <br/>
+                    <br/>
+                  <h:inputText value="#{messageBean.m.titre}" p:placeholder="Objet"/> <br/> <br/>
+                    <h:inputTextarea style="width:100%; min-height:10em; " value="#{messageBean.m.texte}"/> <br/> <br/> 
 
                     <h:commandButton action="#{messageBean.envoyerMessage(authentificationBean.user)}" value="envoyer"/>
                 </h:form>
-       
+                </div>
             </div>
         </section>
         <footer class="container-fluid footer">

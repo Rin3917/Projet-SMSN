@@ -8,21 +8,18 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html">
-    <head>
+    <h:head>
            <style type="text/css" media="screen">@import "css/styles.css";</style>
             <title>homePage</title>
             <link href="css/bootstrap.min.css" rel="stylesheet"/>
             <link href="css/cssSucces.css" rel="stylesheet"/>    
             <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
       
           
-       <header class="container-fluid header  ">
-             <h1 class="titre">SNSM Montbéliard</h1>
-            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
-        </header>
+      <script src="header.js"></script>
           <script src="menu.js"></script>
            <script>
      // When the user scrolls the page, execute myFunction 
@@ -47,9 +44,10 @@ function myFunction() {
             <div class="container main">
         <h:form>
             <br/>
-            <h:outputText value="#{authentificationBean.user.nom} "/>
-            <h:outputText value="#{authentificationBean.user.prenom}"/> <br/>
-            Votre email : <h:inputText value="#{authentificationBean.user.mail}"/>
+            <h:graphicImage style="width: 100px; height: 100px" value="#{authentificationBean.user.avatar}"/><br/><br/>
+           Nom : <h:outputText value="#{authentificationBean.user.nom} "/><br/>
+           Prenom : <h:outputText value="#{authentificationBean.user.prenom}"/> <br/>
+           Mail :<h:outputText value="#{authentificationBean.user.mail}"/><br/><br/>
         </h:form>   
         <a href="modifierPreference.jsf"><input type="button" value="Modifier mon avatar"/></a><br/>
             </div>
@@ -57,5 +55,5 @@ function myFunction() {
            <footer class="container-fluid footer">
 
         </footer>
-    </body>
+    </h:body>
 </html>

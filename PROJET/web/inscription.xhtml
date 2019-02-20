@@ -12,59 +12,43 @@ xmlns:h="http://java.sun.com/jsf/html">
           <style type="text/css" media="screen">@import "css/styles.css";</style>
             <title>homePage</title>
             <link href="css/bootstrap.min.css" rel="stylesheet"/>
-            <link href="css/cssSucces.css" rel="stylesheet"/>    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+            <link href="css/cssAuthentification.css" rel="stylesheet"/>    
             <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
     </head>
     <body>
-          
-          
-       <header class="container-fluid header  ">
-             <h1 class="titre">SNSM Montbéliard</h1>
-            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
-        </header>
-          <script src="menu.js"></script> 
-           <script>
-     // When the user scrolls the page, execute myFunction 
-window.onscroll = function() {myFunction()};
+        <h1 style="margin-top:1em;" class="titre">SNSM Montbéliard</h1>
+         <section class="container-fluid middleSection">
+            <div class="container">
+                <div class="col-lg-4 col-md-4 col-sm-4  col-xs-4"></div>
+                <div class="monform col-lg-4 col-md-4 col-sm-4  col-xs-4">
+                     <h:form>
+                         <div class="topForm">
+                         <h4 style="font-weight: bold;">Création de votre compte</h4>
+                         </div>
+                         <br/>
 
-// Get the navbar
-var navbar = document.getElementById("navbar");
-
-// Get the offset position of the navbar
-var sticky = navbar.offsetTop;
-
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
-}
- </script>
-            <section class="container-fluid">
-            <div class="container main">
-        <h:form>
-            Bienvenue <br/>
-            Veuillez entrez votre adresse mail.
-            <p class="label"><label>E-mail</label></p>
-            <p><h:inputText label="Adresse Mail" id="mail" value="#{utilisateurBean.user.mail}" required="true" styleClass="input"/></p>
+            Adresse Mail
+            <p><span class="icone glyphicon glyphicon-envelope"><h:inputText class="formInput" label="Adresse Mail" id="mail" value="#{utilisateurBean.user.mail}" required="true" styleClass="input"/></span></p> <br/>
             Nom
-            <p><h:inputText label="Nom" id="nom" value="#{utilisateurBean.user.nom}" required="true" styleClass="input"/></p>
+            <p><span class="icone glyphicon glyphicon-user"><h:inputText class="formInput" label="Nom" id="nom" value="#{utilisateurBean.user.nom}" required="true" styleClass="input"/></span></p><br/>
             Prénom
-            <p><h:inputText label="Prénom" id="prenom" value="#{utilisateurBean.user.prenom}" required="true" styleClass="input"/></p>
+            <p><span class="icone glyphicon glyphicon-user"><h:inputText class="formInput" label="Prénom" id="prenom" value="#{utilisateurBean.user.prenom}" required="true" styleClass="input"/></span></p><br/>
             Téléphone
-            <p><h:inputText label="Téléphone" id="telephone" value="#{utilisateurBean.user.telephone}" required="true" styleClass="input"/></p>
+            <p><span class="icone glyphicon glyphicon-phone"><h:inputText  class="formInput"  label="Téléphone" id="telephone" value="#{utilisateurBean.user.telephone}" required="true" /></span></p>    <br/>
             Mot de passe
-            <p><h:inputSecret label="Mot de passe" id="mdp" value="#{utilisateurBean.user.mdp}" required="true" styleClass="input"/></p>
-            <p><h:commandButton value="Valider" action="#{utilisateurBean.inscrireUtilisateur()}" styleClass="boutonvalider"/></p>
+            <p><span class="icone glyphicon glyphicon-asterisk"><h:inputSecret class="formInput" label="Mot de passe" id="mdp" value="#{utilisateurBean.user.mdp}" required="true" styleClass="input"/></span></p><br/>
+            <p><h:commandButton value="Valider" style="border-radius:0px; border:none; margin-left: 2em; margin-left: 12.7%;  width:74.5%;" class="btn-success btn-valider btn-lg" action="#{utilisateurBean.inscrireUtilisateur()}" styleClass="boutonvalider"/></p>
      
         </h:form>
+                  
+                           
+                </div>
+                
+                <div class="col-lg-4 col-md-4 col-sm-4  col-xs-4"></div>
             </div>
-            </section>
-               <footer class="container-fluid footer">
-
-        </footer>
+        </section>
+              
     </body>
 </html>

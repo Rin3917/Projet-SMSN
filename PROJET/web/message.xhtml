@@ -7,60 +7,75 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-          <style type="text/css" media="screen">@import "css/styles.css";</style>
-            <title>homePage</title>
-            <link href="css/bootstrap.min.css" rel="stylesheet"/>
-            <link href="css/cssSucces.css" rel="stylesheet"/>    
-            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
-            <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
+        <style type="text/css" media="screen">@import "css/styles.css";</style>
+        <title>homePage</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/cssSucces.css" rel="stylesheet"/>    
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
     </h:head>
     <h:body>
-       
-       
-        <header class="container-fluid header  ">
-              <h1 class="titre">SNSM Montbéliard</h1>
-            <img src="img/snsm-art.jpg" class="banner" alt="banner"/>
-        </header>
-         <script src="menu.js"></script>
-          <script>
-     // When the user scrolls the page, execute myFunction 
-window.onscroll = function() {myFunction()};
+
+
+        <script src="header.js"></script>
+        <script src="menu.js"></script>
+        <script>
+            // When the user scrolls the page, execute myFunction 
+            window.onscroll = function () {
+                myFunction()
+            };
 
 // Get the navbar
-var navbar = document.getElementById("navbar");
+            var navbar = document.getElementById("navbar");
 
 // Get the offset position of the navbar
-var sticky = navbar.offsetTop;
+            var sticky = navbar.offsetTop;
 
 // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
-}
- </script>
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+        </script>
         <br/>
         <section class="container-fluid">
             <div class="container main">
-                <p:dataTable var="obj" value="#{authentificationBean.afficherMail()}">
+                <h3 style="font-weight: bold; text-align: center;">Mes messages</h3> <br/>
 
-                    <p:column headerText="titre">
-                        <h:outputText value="#{obj.titre}" /> 
-                    </p:column> 
-                    <p:column headerText="expediteur">
-                        <h:outputText value="#{obj.expediteur.nom}" /> 
-                    </p:column> 
-                    <p:column headerText="contenue" >
-                        <h:outputText value="#{obj.texte}" /> 
-                    </p:column>
-                    <p:column headerText="" >
-                        <h:commandButton value="supprimer" action="#{authentificationBean.supprimerMessage(obj)}"/>
-                    </p:column>
-                </p:dataTable>
+                <h:form>
+                    
+                    <p:dataTable var="obj" value="#{authentificationBean.afficherMail()}">
+                        
+                        <p:column style="width:60px">
+                            <p:rowToggler />
+                        </p:column>
+                        <p:column headerText="Expediteur">
+                            <h:outputText value="#{obj.expediteur.nom}" /> 
+                        </p:column> 
+                        <p:column headerText="Objet">
+                            <h:outputText value="#{obj.titre}" /> 
+                        </p:column> 
+                        <p:rowExpansion>
+
+                            <div class="textMessage">
+                                <h:outputText value="#{obj.texte}" /> 
+                            </div>
+
+                        </p:rowExpansion>
+
+                        <p:column headerText="" >
+                            <h:commandButton value="supprimer" action="#{authentificationBean.supprimerMessage(obj)}"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                    
+                </h:form>
                 <br/>
 
             </div>

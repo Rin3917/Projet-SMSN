@@ -45,6 +45,7 @@ public class Utilisateur implements Serializable {
     private List<Article> mesArticle = new ArrayList<Article>();
     @ManyToMany
     private List<Participation> mesParticipations = new ArrayList <Participation>();
+    
 
     public Utilisateur() {
     }
