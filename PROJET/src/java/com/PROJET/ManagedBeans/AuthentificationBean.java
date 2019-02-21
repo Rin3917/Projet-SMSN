@@ -13,6 +13,7 @@ import com.PROJET.JavaBeans.Utilisateur;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
@@ -42,6 +43,17 @@ public class AuthentificationBean implements Serializable {
     private UtilisateurEjb monejb = new UtilisateurEjb();
     private Utilisateur user;
     private PosteDeSecours pds = new PosteDeSecours();
+    
+ private List<Utilisateur> participant = new ArrayList<Utilisateur>();
+
+    public List<Utilisateur> getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(List<Utilisateur> participant) {
+        this.participant = participant;
+    }
+
 
     public UtilisateurEjb getMonejb() {
         return monejb;
@@ -70,7 +82,30 @@ public class AuthentificationBean implements Serializable {
         }
 
     }
-
+    public void validerParticipation(Utilisateur us){
+       this.monejb.ValiderParticipation(us, pds);
+       Message m = new Message();
+         m.setDestinataire(us);
+            m.setExpediteur(this.user);
+            m.setIsRead(Boolean.FALSE);
+            m.setTexte("Nous vous informons que votre Participations au poste de secours" + pds.getNomPoste()+ "a bien été validé.");
+            m.setTitre("Message-System: Participation Validé");
+            this.monejb.ajouterMessager(m);
+    }
+    public String voirParticipant(PosteDeSecours pds){
+        this.pds=pds;
+        this.participant= this.monejb.getParticipants(pds);
+         return"detailParticipantPoste.jsf?faces-redirect=true";
+     }
+    public String ParticipationIsValide(Utilisateur u){
+        Boolean bool = this.monejb.ParticipationisValider(u, pds);
+        if(bool == true){
+            return"Valide";
+        }
+        else{
+            return"Valider Participation";
+        }
+    }
     public String supprimerMessage(Message msg) {
 
         if (this.user.getIsAdmin() == false) {
@@ -86,13 +121,16 @@ public class AuthentificationBean implements Serializable {
 
     public String ajouterPds() {
         if (this.user.getIsAdmin() == false) {
+            this.pds=null;
             return this.deconnexion();
 
         } else {
             this.monejb.ajouterPds(this.pds);
+            this.pds = new PosteDeSecours();
             return "prochainPosteAdmin.jsf?faces-redirect=true";
 
         }
+        
 
     }
 
@@ -113,6 +151,13 @@ public class AuthentificationBean implements Serializable {
 
         } else {
             this.monejb.ConfirmUser(u);
+            Message m = new Message();
+            m.setDestinataire(u);
+            m.setExpediteur(this.user);
+            m.setIsRead(Boolean.FALSE);
+            m.setTexte("Nous vous informons que votre inscriptions à bien été valider,vous pouvez a présent vous inscrire a dès postes de secours.");
+            m.setTitre("Message-System: Compte validé");
+           this.monejb.ajouterMessager(m);
             return "ajoutSauveteurAdmin.jsf?faces-redirect=true";
         }
 
@@ -126,9 +171,9 @@ public class AuthentificationBean implements Serializable {
         Boolean test = this.monejb.isParticipe(pds, user);
 
         if (test == true) {
-            return "Modifier ma participation";
+            return "Modifier participation";
         } else {
-            return "Participer a ce poste";
+            return "Participer";
         }
 
     }
@@ -136,8 +181,14 @@ public class AuthentificationBean implements Serializable {
     public String RenvoiFormParticipation(PosteDeSecours pds) {
 
         if (this.user.getIsAdmin() == false) {
+            if(this.user.getIsConfirmed() == true)
+            {
             this.pds = pds;
             return "inscriptionPoste.jsf";
+            }
+            FacesMessage message = new FacesMessage("votre Inscription n'a pas encore été validé, vous ne pouvez pas vous inscrire a un poste de secours pour l'instant");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return "prochainPosteAdmin.jsf";
 
         } else {
             this.pds = pds;

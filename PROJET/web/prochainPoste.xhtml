@@ -40,29 +40,55 @@ function myFunction() {
   }
 }
  </script>
-        <section class="container-fluid">
+          <section class="container-fluid">
             <div class="container main">
-                <p:dataTable var="obj" value="#{posteDeSecoursBean.afficherPds()}">
+                <h:form>
+                    <p:dataTable var="obj" value="#{posteDeSecoursBean.afficherPds()}">
+               <p:column style="width:60px">
+                   
+                            <p:rowToggler />
+                        </p:column>
+            <p:column headerText="titre">
+                Poste <h:outputText value="#{obj.nomPoste}" /> <br/><br/>
 
-                    <p:column headerText="poste">
-                        Poste <h:outputText value="#{obj.nomPoste}" /> <br/><br/>
-                        du <h:outputText value="#{obj.dateDebut.date}"/> / <h:outputText value="#{obj.dateDebut.month+1}"/> / <h:outputText value="#{obj.dateDebut.year-100}"/>
-                        au <h:outputText value="#{obj.dateFin.date}"/> / <h:outputText value="#{obj.dateFin.month+1}"/> / <h:outputText value="#{obj.dateFin.year-100}"/> <br/><br/>
-                        a partir de <h:outputText value="#{obj.heureDebut}"/>
-                        jusqu'a <h:outputText value="#{obj.heureFin}"/><br/><br/>
+            
+      </p:column>
+             <p:column headerText="date">
+                du <h:outputText value="#{obj.dateDebut.date}"/> / <h:outputText value="#{obj.dateDebut.month+1}"/> / <h:outputText value="#{obj.dateDebut.year-100}"/>
+                au <h:outputText value="#{obj.dateFin.date}"/> / <h:outputText value="#{obj.dateFin.month+1}"/> / <h:outputText value="#{obj.dateFin.year-100}"/> <br/><br/>
 
-
-                        <h:outputText value="#{obj.commentaire}" /> 
-                    </p:column>
-                    <p:column>
-                        <h:form>
-                            <h:commandButton value="#{authentificationBean.Participe(obj,authentificationBean.user)}" action="#{authentificationBean.RenvoiFormParticipation(obj)}"/>      
-                        </h:form>  
-                    </p:column>
-                </p:dataTable>
-
-
+          
+      </p:column>
+             <p:column headerText="horaire">
+                a partir de <h:outputText value="#{obj.heureDebut}"/>
+                jusqu'a <h:outputText value="#{obj.heureFin}"/><br/><br/>
+                  
+      </p:column>
+             
+           
+            
+               <p:rowExpansion>
          
+                <div class="textMessage">
+                    <h4 style="font-weight: bold;"> Description du Poste</h4>
+                <h:outputText value="#{obj.commentaire}" /> 
+                </div>
+                  
+                 
+        </p:rowExpansion>
+            <p:column>
+           <h:messages styleClass="message_erreur" id="message_erreur" />
+                     <h:commandButton value="#{authentificationBean.Participe(obj,authentificationBean.user)}" action="#{authentificationBean.RenvoiFormParticipation(obj)}"/>
+                      
+      
+                
+            </p:column>
+
+        </p:dataTable>
+                    </h:form>
+                
+        
+      
             </div>
         </section>
         <footer class="container-fluid footer">

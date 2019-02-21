@@ -26,6 +26,7 @@ public class Participation implements Serializable {
       
       private String heureDebut;
       private String heureFin;
+      private Boolean isValide;
       
       @ManyToOne
       private Utilisateur Participant;
@@ -42,6 +43,14 @@ public class Participation implements Serializable {
 
     public Long getIdParticipation() {
         return idParticipation;
+    }
+
+    public Boolean getIsValide() {
+        return isValide;
+    }
+
+    public void setIsValide(Boolean isValide) {
+        this.isValide = isValide;
     }
 
     public void setIdParticipation(Long idParticipation) {

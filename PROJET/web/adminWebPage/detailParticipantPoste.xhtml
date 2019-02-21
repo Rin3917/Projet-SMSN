@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licence pro informatique 2018/2019
+Université de Franche-Comté
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <style type="text/css" media="screen">@import "css/styles.css";</style>
+            <title>homePage</title>
+            <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+            <link href="../css/cssSucces.css" rel="stylesheet"/>    
+            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+       
+      <script src="header.js"></script>
+         <script src="menuAdmin.js"></script>
+          <script>
+     // When the user scrolls the page, execute myFunction 
+window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+ </script>
+        <section class="container-fluid">
+            <div class="container main">
+
+            
+                <h:form>
+                    <p:dataTable  var="obj" id="participant" value="#{authentificationBean.participant}" rows="5"
+                                  paginator="true"
+                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                  rowsPerPageTemplate="5,10,15" >
+                        
+                        <p:column headerText="Avatar">
+                             <img style="width: 50px; height: 50px;" src="../#{obj.avatar}"/>
+                        </p:column>
+                      
+                         <p:column filterBy="#{obj.nom}" headerText="nom"  filterMatchMode="contains">
+                            <h:outputText value="#{obj.nom}" />
+                        </p:column>
+                        
+                        <p:column filterBy="#{obj.prenom}" headerText="prenom" filterMatchMode="contains">
+                            <h:outputText value="#{obj.prenom}" />
+                        </p:column>
+                        <p:column filterBy="#{obj.mail}" headerText="mail"  filterMatchMode="contains">
+                            <h:outputText value="#{obj.mail}" />
+                        </p:column>
+                         <p:column  headerText="Etat" >
+                             <h:commandButton action="#{authentificationBean.validerParticipation(obj)}" value="#{authentificationBean.ParticipationIsValide(obj)}"/>
+                        </p:column>
+
+                   
+                        <f:facet name="paginatorTopLeft">
+                            <p:commandButton type="button" icon="pi pi-refresh" />
+                        </f:facet>
+
+                        <f:facet name="paginatorBottomRight">
+                            <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                        </f:facet>
+
+                    </p:dataTable>
+                </h:form>
+
+            </div>
+        </section>
+
+        <footer class="container-fluid footer">
+
+        </footer>
+    </h:body>
+</html>

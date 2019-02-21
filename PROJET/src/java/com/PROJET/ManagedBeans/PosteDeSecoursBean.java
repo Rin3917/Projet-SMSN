@@ -8,6 +8,8 @@ package com.PROJET.ManagedBeans;
 import com.PROJET.Ejb.UtilisateurEjb;
 import com.PROJET.JavaBeans.Message;
 import com.PROJET.JavaBeans.PosteDeSecours;
+import com.PROJET.JavaBeans.Utilisateur;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -34,6 +36,7 @@ public class PosteDeSecoursBean {
     private UtilisateurEjb monejb = new UtilisateurEjb();
 
     PosteDeSecours pds = new PosteDeSecours();
+    List<Utilisateur> participant = new ArrayList<Utilisateur>();
 
     public PosteDeSecours getPds() {
         return pds;
@@ -46,10 +49,28 @@ public class PosteDeSecoursBean {
         return this.monejb.afficherPds();
        
     }
+     public List<PosteDeSecours> afficherAncienPds(){
+        return this.monejb.afficherAncienPds();
+       
+    }
+ 
     
     public String ajouterPds(){
+        this.pds.setIsTerminer(false);
         this.monejb.ajouterPds(this.pds);
          return"prochainPoste.jsf?faces-redirect=true";
+    }
+   
+    public void updatePds(PosteDeSecours pds){
+        this.monejb.TerminerPds(pds);
+    }
+
+    public List<Utilisateur> getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(List<Utilisateur> participant) {
+        this.participant = participant;
     }
     
     public void supprimerPds(){

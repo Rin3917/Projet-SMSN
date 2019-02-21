@@ -8,15 +8,15 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:p="http://primefaces.org/ui"
 xmlns:h="http://java.sun.com/jsf/html">
-    <head>
+    <h:head>
        <style type="text/css" media="screen">@import "css/styles.css";</style>
             <title>homePage</title>
             <link href="../css/bootstrap.min.css" rel="stylesheet"/>
             <link href="../css/cssSucces.css" rel="stylesheet"/>    
             <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
       
           
          <script src="header.js"></script>
@@ -40,15 +40,75 @@ function myFunction() {
   }
 }
  </script>
-       <section class="container-fluid">
-           <div class="container main">
-               
-               
-           </div>
-       </section>
+         <section class="container-fluid">
+            <div class="container main">
+                <h:form>
+                    <p:dataTable var="obj" value="#{posteDeSecoursBean.afficherAncienPds()}">
+               <p:column style="width:60px">
+                   
+                            <p:rowToggler />
+                        </p:column>
+            <p:column headerText="titre">
+                Poste <h:outputText value="#{obj.nomPoste}" /> <br/><br/>
+
+            
+      </p:column>
+             <p:column headerText="date">
+                du <h:outputText value="#{obj.dateDebut.date}"/> / <h:outputText value="#{obj.dateDebut.month+1}"/> / <h:outputText value="#{obj.dateDebut.year-100}"/>
+                au <h:outputText value="#{obj.dateFin.date}"/> / <h:outputText value="#{obj.dateFin.month+1}"/> / <h:outputText value="#{obj.dateFin.year-100}"/> <br/><br/>
+
+          
+      </p:column>
+             <p:column headerText="horaire">
+                a partir de <h:outputText value="#{obj.heureDebut}"/>
+                jusqu'a <h:outputText value="#{obj.heureFin}"/><br/><br/>
+                  
+      </p:column>
+             
+           
+            
+               <p:rowExpansion>
+         
+                <div class="textMessage">
+                    <h4 style="font-weight: bold;"> Description du Poste</h4>
+                <h:outputText value="#{obj.commentaire}" /> 
+                </div>
+                  
+                 
+        </p:rowExpansion>
+            <p:column>
+           
+                     <h:commandButton value="#{authentificationBean.Participe(obj,authentificationBean.user)}" action="#{authentificationBean.RenvoiFormParticipation(obj)}"/>
+                      
+      
+                
+            </p:column>
+              <p:column>
+             
+                   
+                     <h:commandButton value="supprimer" action="#{authentificationBean.supprimerPds(obj)}"/>   
+          
+                
+            </p:column>
+              <p:column>
+                 
+                    
+                     <h:commandButton value="Fin du Poste" action="#{posteDeSecoursBean.updatePds(obj)}"/>   
+       
+                
+            </p:column>
+            
+  
+        </p:dataTable>
+                    </h:form>
+                
+        
+       
+            </div>
+        </section>
     
            <footer class="container-fluid footer">
 
         </footer>
-    </body>
+    </h:body>
 </html>

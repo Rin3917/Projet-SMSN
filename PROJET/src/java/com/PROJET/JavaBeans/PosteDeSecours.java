@@ -37,6 +37,9 @@ public class PosteDeSecours implements Serializable {
     private String Lieu;
     private int SauveteurMinRequis;
     private String Commentaire;
+    private boolean isTerminer;
+    
+    
     
     @OneToMany
     private List<Participation> Participations = new ArrayList<Participation>();
@@ -49,6 +52,14 @@ public class PosteDeSecours implements Serializable {
 
     public Long getIdPosteDeSecours() {
         return idPosteDeSecours;
+    }
+
+    public boolean isIsTerminer() {
+        return isTerminer;
+    }
+
+    public void setIsTerminer(boolean isTerminer) {
+        this.isTerminer = isTerminer;
     }
 
     public void setIdPosteDeSecours(Long idPosteDeSecours) {

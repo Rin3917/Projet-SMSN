@@ -204,12 +204,12 @@ public class UtilisateurEjb {
          List<Utilisateur> participants = new ArrayList<Utilisateur>();
          
          for(Participation part : pds.getParticipations()){
-              Query q = em.createQuery("SELECT u  FROM  Utilisateur u WHERE u.idUtilisateur :idUtilisateur ");
+              Query q = em.createQuery("SELECT u  FROM  Utilisateur u WHERE u.idUtilisateur= :idUtilisateur ");
         q.setParameter("idUtilisateur", part.getParticipant().getIdUtilisateur() );
  
         try {
            participants.add((Utilisateur) q.getSingleResult());
-            System.out.println("debugGetParticipants");
+            System.out.println("debugGetParticipants"+participants.size()+participants.get(0).getNom());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -219,6 +219,53 @@ public class UtilisateurEjb {
 
         return participants;
     }
+     
+     public void TerminerPds(PosteDeSecours pds){
+          try {
+          
+
+            Query u = em.createQuery("UPDATE PosteDeSecours p SET p.isTerminer= :bool WHERE p.idPosteDeSecours= :idPosteDeSecours");
+            u.setParameter("bool", true);
+             u.setParameter("idPosteDeSecours", pds.getIdPosteDeSecours());
+           
+            u.executeUpdate();
+
+        } catch (Exception e) {
+
+        }
+     }
+     public boolean ParticipationisValider (Utilisateur u, PosteDeSecours p){
+         boolean bool =false;
+       Query q = em.createQuery("SELECT p FROM Participation p WHERE p.pds.idPosteDeSecours= :pds AND p.Participant.idUtilisateur= :Participant");
+         try{
+              q.setParameter("pds", p.getIdPosteDeSecours());
+              q.setParameter("Participant", u.getIdUtilisateur());
+             Participation part = (Participation) q.getSingleResult();
+             bool = part.getIsValide();
+             return bool;
+         }catch(Exception e){
+             System.out.println("erreur de la requete " +e);
+         }
+         return bool;
+     }
+     
+     public void ValiderParticipation(Utilisateur u, PosteDeSecours p){
+           try {
+          
+System.out.println("validerParticipation");
+            Query q = em.createQuery("UPDATE Participation part SET part.isValide= :true WHERE part.pds.idPosteDeSecours= :pds AND part.Participant.idUtilisateur= :Participant");
+            q.setParameter("true", true);
+             q.setParameter("pds", p.getIdPosteDeSecours());
+              q.setParameter("Participant", u.getIdUtilisateur());
+           
+            int result = q.executeUpdate();
+          System.out.println("result"+result);
+          System.out.println("idPds"+p.getIdPosteDeSecours());
+          System.out.println("pdsUser"+u.getIdUtilisateur());
+        } catch (Exception e) {
+System.out.println("erreur de la requete "+e);
+        }
+     }
 
     public List<Utilisateur> afficherTlm() {
         List<Utilisateur> listUser = new ArrayList<Utilisateur>();
@@ -238,8 +285,23 @@ public class UtilisateurEjb {
     public List<PosteDeSecours> afficherPds() {
         List<PosteDeSecours> lpds = new ArrayList<PosteDeSecours>();
 
-        Query q = em.createQuery("SELECT  p FROM PosteDeSecours p ");
+        Query q = em.createQuery("SELECT  p FROM PosteDeSecours p WHERE p.isTerminer= :false");
         try {
+            q.setParameter("false", false);
+            lpds = q.getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lpds;
+    }
+      public List<PosteDeSecours> afficherAncienPds() {
+        List<PosteDeSecours> lpds = new ArrayList<PosteDeSecours>();
+
+        Query q = em.createQuery("SELECT  p FROM PosteDeSecours p WHERE p.isTerminer= :true");
+        try {
+            q.setParameter("true", true);
             lpds = q.getResultList();
 
         } catch (Exception e) {

@@ -77,12 +77,34 @@ function myFunction() {
                  
         </p:rowExpansion>
             <p:column>
-                 <h:form>
+           
                      <h:commandButton value="#{authentificationBean.Participe(obj,authentificationBean.user)}" action="#{authentificationBean.RenvoiFormParticipation(obj)}"/>
-                     <h:commandButton value="supprimer Poste de Secours" action="#{authentificationBean.supprimerPds(obj)}"/>   
-            </h:form>
+                      
+      
                 
             </p:column>
+              <p:column>
+             
+                   
+                     <h:commandButton value="supprimer" action="#{authentificationBean.supprimerPds(obj)}"/>   
+          
+                
+            </p:column>
+              <p:column>
+                 
+                    
+                     <h:commandButton value="Fin du Poste" action="#{posteDeSecoursBean.updatePds(obj)}"/>   
+       
+                
+            </p:column>
+             <p:column>
+                 
+                    
+                 <h:commandButton value="Voir Participant" action="#{authentificationBean.voirParticipant(obj)}"/>   
+       
+                
+            </p:column>
+            
             
   
         </p:dataTable>
