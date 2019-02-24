@@ -5,6 +5,7 @@
  */
 package com.PROJET.Ejb;
 
+import com.PROJET.JavaBeans.Article;
 import com.PROJET.JavaBeans.Message;
 import com.PROJET.JavaBeans.Participation;
 import static com.PROJET.JavaBeans.Participation_.pds;
@@ -48,7 +49,8 @@ public class UtilisateurEjb {
 
         q.executeUpdate();
     }
-      public void supprimerMessage(Message msg) {
+
+    public void supprimerMessage(Message msg) {
         Query q = em.createQuery("DELETE FROM Message p WHERE p.idMessage= :idMessage");
         q.setParameter("idMessage", msg.getIdMessage());
 
@@ -90,23 +92,23 @@ public class UtilisateurEjb {
 
     public void ConfirmUser(Utilisateur user) {
 
-        try{
-        Query u = em.createQuery("UPDATE Utilisateur user SET user.isConfirmed = :isConfirmed WHERE user.idUtilisateur= :idUtilisateur");
-        u.setParameter("isConfirmed", true);
-        u.setParameter("idUtilisateur", user.getIdUtilisateur());
-        u.executeUpdate();
-        }catch(Exception e){
-            
+        try {
+            Query u = em.createQuery("UPDATE Utilisateur user SET user.isConfirmed = :isConfirmed WHERE user.idUtilisateur= :idUtilisateur");
+            u.setParameter("isConfirmed", true);
+            u.setParameter("idUtilisateur", user.getIdUtilisateur());
+            u.executeUpdate();
+        } catch (Exception e) {
+
         }
     }
-    
-    public void supprimerUser(Utilisateur user){
-         try{
-        Query u = em.createQuery("DELETE FROM Utilisateur user WHERE user.idUtilisateur= :idUtilisateur");
-        u.setParameter("idUtilisateur", user.getIdUtilisateur());
-        u.executeUpdate();
-        }catch(Exception e){
-            
+
+    public void supprimerUser(Utilisateur user) {
+        try {
+            Query u = em.createQuery("DELETE FROM Utilisateur user WHERE user.idUtilisateur= :idUtilisateur");
+            u.setParameter("idUtilisateur", user.getIdUtilisateur());
+            u.executeUpdate();
+        } catch (Exception e) {
+
         }
     }
 
@@ -165,6 +167,34 @@ public class UtilisateurEjb {
 
         }
     }
+    
+    public List<Article> getListArticle(){
+          List<Article> articles = new ArrayList<Article>();
+        Query q = em.createQuery("SELECT a FROM Article a");
+
+        try {
+            articles = q.getResultList();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return articles;
+        
+    }
+      public void ajouterArticle(Article a) {
+        try {
+            em.merge(a);
+        } catch (Exception e) {
+
+        }
+    }
+      
+      public void supprimerArticle(Article a){
+           Query q = em.createQuery("DELETE FROM Article a WHERE a.idArticle= :idArticle");
+        q.setParameter("idArticle", a.getIdArticle());
+
+        q.executeUpdate();
+      }
 
     public Utilisateur getUtilisateurById(int idUtilisateur) {
         Utilisateur user = new Utilisateur();
@@ -198,74 +228,71 @@ public class UtilisateurEjb {
         return user;
 
     }
-    
-     public List<Utilisateur> getParticipants(PosteDeSecours pds){
-         
-         List<Utilisateur> participants = new ArrayList<Utilisateur>();
-         
-         for(Participation part : pds.getParticipations()){
-              Query q = em.createQuery("SELECT u  FROM  Utilisateur u WHERE u.idUtilisateur= :idUtilisateur ");
-        q.setParameter("idUtilisateur", part.getParticipant().getIdUtilisateur() );
- 
-        try {
-           participants.add((Utilisateur) q.getSingleResult());
-            System.out.println("debugGetParticipants"+participants.size()+participants.get(0).getNom());
 
-        } catch (Exception e) {
-            e.printStackTrace();
+    public List<Utilisateur> getParticipants(PosteDeSecours pds) {
+
+        List<Utilisateur> participants = new ArrayList<Utilisateur>();
+
+        for (Participation part : pds.getParticipations()) {
+            Query q = em.createQuery("SELECT u  FROM  Utilisateur u WHERE u.idUtilisateur= :idUtilisateur ");
+            q.setParameter("idUtilisateur", part.getParticipant().getIdUtilisateur());
+
+            try {
+                participants.add((Utilisateur) q.getSingleResult());
+                System.out.println("debugGetParticipants" + participants.size() + participants.get(0).getNom());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
-             
-         }
 
         return participants;
     }
-     
-     public void TerminerPds(PosteDeSecours pds){
-          try {
-          
+
+    public void TerminerPds(PosteDeSecours pds) {
+        try {
 
             Query u = em.createQuery("UPDATE PosteDeSecours p SET p.isTerminer= :bool WHERE p.idPosteDeSecours= :idPosteDeSecours");
             u.setParameter("bool", true);
-             u.setParameter("idPosteDeSecours", pds.getIdPosteDeSecours());
-           
+            u.setParameter("idPosteDeSecours", pds.getIdPosteDeSecours());
+
             u.executeUpdate();
 
         } catch (Exception e) {
 
         }
-     }
-     public boolean ParticipationisValider (Utilisateur u, PosteDeSecours p){
-         boolean bool =false;
-       Query q = em.createQuery("SELECT p FROM Participation p WHERE p.pds.idPosteDeSecours= :pds AND p.Participant.idUtilisateur= :Participant");
-         try{
-              q.setParameter("pds", p.getIdPosteDeSecours());
-              q.setParameter("Participant", u.getIdUtilisateur());
-             Participation part = (Participation) q.getSingleResult();
-             bool = part.getIsValide();
-             return bool;
-         }catch(Exception e){
-             System.out.println("erreur de la requete " +e);
-         }
-         return bool;
-     }
-     
-     public void ValiderParticipation(Utilisateur u, PosteDeSecours p){
-           try {
-          
-System.out.println("validerParticipation");
+    }
+
+    public boolean ParticipationisValider(Utilisateur u, PosteDeSecours p) {
+        boolean bool = false;
+        Query q = em.createQuery("SELECT p FROM Participation p WHERE p.pds.idPosteDeSecours= :pds AND p.Participant.idUtilisateur= :Participant");
+        try {
+            q.setParameter("pds", p.getIdPosteDeSecours());
+            q.setParameter("Participant", u.getIdUtilisateur());
+            Participation part = (Participation) q.getSingleResult();
+            bool = part.getIsValide();
+            return bool;
+        } catch (Exception e) {
+            System.out.println("erreur de la requete " + e);
+        }
+        return bool;
+    }
+
+    public void ValiderParticipation(Utilisateur u, PosteDeSecours p) {
+        try {
+
+            System.out.println("validerParticipation");
             Query q = em.createQuery("UPDATE Participation part SET part.isValide= :true WHERE part.pds.idPosteDeSecours= :pds AND part.Participant.idUtilisateur= :Participant");
             q.setParameter("true", true);
-             q.setParameter("pds", p.getIdPosteDeSecours());
-              q.setParameter("Participant", u.getIdUtilisateur());
-           
+            q.setParameter("pds", p.getIdPosteDeSecours());
+            q.setParameter("Participant", u.getIdUtilisateur());
+
             int result = q.executeUpdate();
-          System.out.println("result"+result);
-          System.out.println("idPds"+p.getIdPosteDeSecours());
-          System.out.println("pdsUser"+u.getIdUtilisateur());
         } catch (Exception e) {
-System.out.println("erreur de la requete "+e);
+            System.out.println("erreur de la requete " + e);
         }
-     }
+    }
 
     public List<Utilisateur> afficherTlm() {
         List<Utilisateur> listUser = new ArrayList<Utilisateur>();
@@ -296,7 +323,8 @@ System.out.println("erreur de la requete "+e);
 
         return lpds;
     }
-      public List<PosteDeSecours> afficherAncienPds() {
+
+    public List<PosteDeSecours> afficherAncienPds() {
         List<PosteDeSecours> lpds = new ArrayList<PosteDeSecours>();
 
         Query q = em.createQuery("SELECT  p FROM PosteDeSecours p WHERE p.isTerminer= :true");
@@ -310,6 +338,8 @@ System.out.println("erreur de la requete "+e);
 
         return lpds;
     }
+    
+   
 
     public List<Message> afficherMessage(Utilisateur user) {
         List<Message> listMessage = new ArrayList<Message>();

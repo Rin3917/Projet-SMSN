@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licence pro informatique 2018/2019
+Université de Franche-Comté
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <style type="text/css" media="screen">@import "css/styles.css";</style>
+        <title>homePage</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="../css/cssSucces.css" rel="stylesheet"/>    
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700i,900" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+
+
+        <script src="header.js"></script>
+        <script src="menuAdmin.js"></script> 
+        <script>
+            // When the user scrolls the page, execute myFunction 
+            window.onscroll = function () {
+                myFunction()
+            };
+
+// Get the navbar
+            var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+            var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+        </script>
+        <section class="container-fluid">
+            <div class="container main">
+                <h3 style="font-weight: bold; text-align: center;" >Ajouter un Article</h3> <br/>
+                <h:form enctype="multipart/form-data" >
+                    Titre :  <h:inputText  value="#{articleBean.a.titreArticle}"  /> <br/><br/>
+                    Texte :<br/><h:inputTextarea style="min-height:10em ; min-width:90%;" value="#{articleBean.a.texteArticle}"  /><br/>
+                    <p:fileUpload value="#{articleBean.file}" mode="simple" skinSimple="true"/>
+                    <h:commandButton value="ajouter" action="#{articleBean.ajouterArticle(authentificationBean.user)}"/>
+                </h:form>
+
+            </div>
+        </section>
+        <footer class="container-fluid footer">
+
+        </footer>
+    </h:body>
+</html>

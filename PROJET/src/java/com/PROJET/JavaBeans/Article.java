@@ -24,7 +24,7 @@ public class Article implements Serializable {
     
     private String TitreArticle;
     private String TexteArticle;
-    private String Illustration;
+    private String Illustration ;
     
     @ManyToOne
     private Utilisateur auteur;
